@@ -4,6 +4,7 @@ import CreateDestination from './pages/admin/destinations/CreateDestination'
 import ForgotPassword from "./pages/public/ForgotPassword";
 import ResetPassword from "./pages/public/ResetPassword";
 import AddNewTour from "./pages/admin/bookings/AddNewTour";
+import ConfirmOTP from "./pages/public/ConfirmOTP";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/admin/add-new-tour" element={<AddNewTour />} />
+      <Route path="/confirm-otp" element={<ConfirmOTP />} />
     </Routes>
   )
 }
