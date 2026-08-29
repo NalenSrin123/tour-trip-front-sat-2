@@ -14,7 +14,9 @@ const ManageCustomers = () => {
     {
       id: 1,
       name: "Eleanor Richards",
-      avatar: null ,
+      avatar: null,
+      initials: "ER",
+      initialsBg: "bg-blue-100 text-blue-700",
       email: "eleanor.r@example.com",
       phone: "+1 (555) 123-4567",
       bookings: 12,
@@ -25,6 +27,7 @@ const ManageCustomers = () => {
     {
       id: 2,
       name: "Marcus Webb",
+      avatar: null,
       initials: "MW",
       initialsBg: "bg-purple-100 text-purple-700",
       email: "m.webb89@example.com",
@@ -37,7 +40,9 @@ const ManageCustomers = () => {
     {
       id: 3,
       name: "Sophia Chen",
-      avatar: null ,
+      avatar: null,
+      initials: "SC",
+      initialsBg: "bg-emerald-100 text-emerald-700",
       email: "schen.travels@example.com",
       phone: "+1 (555) 987-6543",
       bookings: 24,
@@ -85,7 +90,7 @@ const ManageCustomers = () => {
           </div>
 
           <div className="flex w-full gap-3 md:w-auto">
-            <button className="flex flex-1 items-center justify-between rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 md:min-w-[140px] md:flex-none">
+            <button className="flex flex-1 items-center justify-between rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 md:min-w-35 md:flex-none">
               All Statuses
               <ChevronDown className="h-4 w-4 text-slate-500" />
             </button>
@@ -100,7 +105,7 @@ const ManageCustomers = () => {
         {/* --- Data Table --- */}
         <div className="rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[800px] text-left text-sm">
+            <table className="w-full min-w-200 text-left text-sm">
               <thead className="bg-[#F8FAFC] text-xs font-semibold uppercase tracking-wider text-slate-500 border-b border-slate-200">
                 <tr>
                   <th className="px-6 py-4">Customer</th>
