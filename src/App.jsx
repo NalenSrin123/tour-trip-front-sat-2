@@ -3,6 +3,7 @@ import PlaceholderPage from './components/layout/PlaceholderPage'
 import CreateDestination from './pages/admin/destinations/CreateDestination'
 import ForgotPassword from "./pages/public/ForgotPassword";
 import ResetPassword from "./pages/public/ResetPassword";
+import AddNewTour from "./pages/admin/bookings/AddNewTour";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
       <Route path="/profile" element={<PlaceholderPage title="Profile" />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/admin/add-new-tour" element={<AddNewTour />} />
     </Routes>
   )
 }
