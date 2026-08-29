@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
-import loginlogo from "../assets/loginlogo.jpg";
-import otplogo from "../assets/otplogo.png";
+import loginlogo from "../../assets/loginlogo.jpg";
+import otplogo from "../../assets/otplogo.png";
 
 export default function ConfirmOTP({ email = "you@example.com" }) {
   const [otp, setOtp] = useState(["", "", "", ""]);
