@@ -214,12 +214,12 @@ async function handleSaveDraft() {
   }
 
   return (
-    <div className="bg-background text-on-background min-h-screen">
+    <div className="min-h-screen bg-background text-on-background">
       <AdminSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <AdminHeader onMenuClick={() => setSidebarOpen(true)} />
 
-      <main className="md:ml-sidebar-width p-4 md:p-lg">
-        <div className="max-w-[1200px] mx-auto">
+      <main className="md:ml-sidebar-width min-h-[calc(100vh-4rem)] p-4 md:p-lg">
+        <div className="w-full">
           {successMessage && (
             <div
               role="status"
@@ -259,9 +259,9 @@ async function handleSaveDraft() {
           </div>
 
           {/* Main Form Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-lg">
+          <div className="grid grid-cols-1 gap-6 md:gap-lg lg:grid-cols-[minmax(0,2fr)_minmax(360px,1fr)]">
             {/* Left Column: Primary Information */}
-            <div className="lg:col-span-2 space-y-6 md:space-y-lg">
+            <div className="space-y-6 md:space-y-lg">
               {/* Basic Information Card */}
               <section className="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm p-4 md:p-lg">
                 <h3 className="text-headline-md text-on-surface mb-4 flex items-center gap-2">
@@ -397,7 +397,7 @@ async function handleSaveDraft() {
             </div>
 
             {/* Right Column: Media and Settings */}
-            <div className="space-y-6 md:space-y-lg">
+            <div className="space-y-6 md:space-y-lg lg:sticky lg:top-24 self-start">
               {/* Media Card */}
               <section className="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm p-4 md:p-lg">
                 <h3 className="text-headline-md text-on-surface mb-4 flex items-center gap-2">
