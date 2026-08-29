@@ -1,6 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
 import PlaceholderPage from './components/layout/PlaceholderPage'
 import CreateDestination from './pages/admin/destinations/CreateDestination'
+import ForgotPassword from "./pages/public/ForgotPassword";
+import ResetPassword from "./pages/public/ResetPassword";
 
 function App() {
   return (
@@ -30,8 +32,10 @@ function App() {
       <Route path="/settings" element={<PlaceholderPage title="Settings" />} />
       <Route path="/help" element={<PlaceholderPage title="Help" />} />
       <Route path="/profile" element={<PlaceholderPage title="Profile" />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
     </Routes>
   )
 }
 
-export default App
+export default App;
