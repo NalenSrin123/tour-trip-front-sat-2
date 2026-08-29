@@ -4,10 +4,10 @@ const ForgotPassword = () => {
       <div className="w-full max-w-[922px] min-h-[710px] flex flex-col md:flex-row shadow-lg rounded-lg overflow-hidden">
 
         {/* Left illustration panel */}
-        <div className="hidden md:flex md:w-[419px] md:min-h-[710px] bg-[#648DDB] flex-col items-center justify-center text-center text-white p-6">
-          <div className="w-[250px] h-[250px] lg:w-[311px] lg:h-[311px] mb-6">
+        <div className="hidden md:flex md:w-[419px] md:min-h-[600px] bg-[#648DDB] flex-col items-center justify-center text-center text-white p-6">
+          <div className="w-[250px] h-[250px] lg:w-[250px] lg:h-[250px]">
             <img
-              src="/src/assets/images/common/4957136_1_myimage(1).png"
+              src="/src/assets/images/common/loginlogo.jpg"
               alt="Forgot password illustration"
               className="w-full h-full object-contain"
             />
@@ -61,7 +61,7 @@ const ForgotPassword = () => {
               id="email"
               type="email"
               placeholder="Enter your email"
-              className="w-full rounded-md border border-gray-400 px-3 py-2 outline-none"
+              className="w-full mt-2 rounded-md border border-gray-400 px-3 py-2 outline-none"
               required
             />
           </div>

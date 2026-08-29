@@ -23,9 +23,9 @@ const ResetPassword = () => {
         
         {/* Left illustration panel */}
       <div className="hidden md:flex md:w-[419px] md:min-h-[710px] bg-[#648DDB] flex-col items-center justify-center text-center text-white p-6">
-          <div className="w-[250px] h-[250px] lg:w-[311px] lg:h-[311px] mb-6">
+          <div className="w-[250px] h-[250px] lg:w-[250px] lg:h-[250px] mb-6">
             <img
-              src="/src/assets/images/common/4957136_1_myimage(1).png"
+              src="/src/assets/images/common/loginlogo.jpg"
               alt="Reset password illustration"
               className="w-full h-full object-contain"
             />
@@ -57,7 +57,7 @@ const ResetPassword = () => {
           </div>
 
           {/* New Password */}
-          <div className="w-full flex flex-col relative">
+          <div className="w-full flex flex-col ">
             <label htmlFor="newPassword" className="text-lg font-medium">
               New Password <span className="text-red-600">*</span>
             </label>
