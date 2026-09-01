@@ -5,6 +5,7 @@ import ForgotPassword from "./pages/public/ForgotPassword";
 import ResetPassword from "./pages/public/ResetPassword";
 import AddNewTour from "./pages/admin/bookings/AddNewTour";
 import ConfirmOTP from "./pages/public/ConfirmOTP";
+import Bookings from './pages/admin/bookings/Bookings';
 
 function App() {
   return (
@@ -13,20 +14,20 @@ function App() {
       <Route path="/tours" element={<PlaceholderPage title="Tours" />} />
       <Route path="/categories" element={<PlaceholderPage title="Categories" />} />
       <Route
-  path="/destinations"
-  element={
-    <PlaceholderPage
-      title="Destinations"
-      description="The destinations list page hasn't been built yet — for now, head to Create Destination directly."
-      actionTo="/destinations/create"
-      actionLabel="Create Destination"
-    />
-  }
-/>
+        path="/destinations"
+        element={
+          <PlaceholderPage
+            title="Destinations"
+            description="The destinations list page hasn't been built yet — for now, head to Create Destination directly."
+            actionTo="/destinations/create"
+            actionLabel="Create Destination"
+          />
+        }
+      />
       <Route path="/destinations/create" element={<CreateDestination />} />
       <Route path="/guides" element={<PlaceholderPage title="Guides" />} />
       <Route path="/schedules" element={<PlaceholderPage title="Schedules" />} />
-      <Route path="/bookings" element={<PlaceholderPage title="Bookings" />} />
+      <Route path="/bookings" element={<Bookings />} />
       <Route path="/customers" element={<PlaceholderPage title="Customers" />} />
       <Route path="/reviews" element={<PlaceholderPage title="Reviews" />} />
       <Route path="/reports" element={<PlaceholderPage title="Reports" />} />
