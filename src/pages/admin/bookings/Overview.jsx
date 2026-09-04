@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import AdminSidebar from '../../../components/layout/AdminSidebar';
+import AdminHeader from '../../../components/layout/AdminHeader';
 
 import {
   MapPin,
@@ -60,6 +62,8 @@ const statusData = [
 ];
 
 export default function Dashboard() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   // =========================
   // ADD TOUR STATE
   // =========================
@@ -181,14 +185,19 @@ export default function Dashboard() {
   };
 
   return (
-    <div
-      style={{
-        backgroundColor: "#f8fafc",
-        padding: "32px",
-        minHeight: "100vh",
-        fontFamily: "sans-serif",
-      }}
-    >
+    <div className="bg-slate-50 min-h-screen">
+      <AdminSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <AdminHeader onMenuClick={() => setSidebarOpen(true)} />
+
+      <main className="md:ml-sidebar-width p-4 md:p-8">
+        <div
+          style={{
+            backgroundColor: "#f8fafc",
+            padding: "32px",
+            minHeight: "100vh",
+            fontFamily: "sans-serif",
+          }}
+        >
       {/* =========================
           HEADER
       ========================= */}
@@ -1408,6 +1417,8 @@ export default function Dashboard() {
           </div>
         </div>
       )}
+        </div>
+      </main>
     </div>
   );
 }
