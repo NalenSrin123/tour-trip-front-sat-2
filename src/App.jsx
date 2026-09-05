@@ -9,11 +9,13 @@ import ConfirmOTP from "./pages/public/ConfirmOTP";
 import CreateUser from "./pages/public/CreateUser";
 import List_tour from './components/tour/List_tour';
 import CreateListGuide from './pages/admin/guides/CreateListGuide';
+import ScheduleFormPage from './pages/admin/schedules/ScheduleFormPage';
 import Overview from './pages/admin/bookings/Overview';
 import Bookings from './pages/admin/bookings/Bookings';
 import PromoBanner from './components/layout/PromoBanner'
 import PublicHeader from './components/layout/PublicHeader'
 import PublicFooter from './components/layout/PublicFooter'
+import ManageCustomers from './pages/admin/customers/ManageCustomers';
 
 function App() {
   return (
@@ -22,21 +24,21 @@ function App() {
       <Route path="/tours" element={<List_tour title="Tours" />} />
       <Route path="/categories" element={<PlaceholderPage title="Categories" />} />
       <Route
-  path="/destinations"
-  element={
-    <ManageDestinations
-      title="Destinations"
-      description="The destinations list page hasn't been built yet — for now, head to Create Destination directly."
-      actionTo="/destinations/create"
-      actionLabel="Create Destination"
-    />
-  }
-/>
+        path="/destinations"
+        element={
+          <ManageDestinations
+            title="Destinations"
+            description="The destinations list page hasn't been built yet — for now, head to Create Destination directly."
+            actionTo="/destinations/create"
+            actionLabel="Create Destination"
+          />
+        }
+      />
       <Route path="/destinations/create" element={<CreateDestination />} />
       <Route path="/guides" element={<CreateListGuide title="Guides" />} />
-      <Route path="/schedules" element={<PlaceholderPage title="Schedules" />} />
+      <Route path="/schedules" element={<ScheduleFormPage />} />
       <Route path="/bookings" element={<Bookings />} />
-      <Route path="/customers" element={<PlaceholderPage title="Customers" />} />
+      <Route path="/customers" element={<ManageCustomers/>} />
       <Route path="/reviews" element={<PlaceholderPage title="Reviews" />} />
       <Route path="/reports" element={<PlaceholderPage title="Reports" />} />
       <Route path="/payments" element={<PlaceholderPage title="Payments" />} />

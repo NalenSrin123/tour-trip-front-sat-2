@@ -105,7 +105,7 @@ function Bookings() {
                   <div className="flex items-center rounded-xl border border-[#d3dae7] bg-white px-3 py-3 text-slate-500 shadow-sm">
                     <button
                       type="button"
-                      className="mr-2 flex items-center justify-center rounded-md text-slate-500 transition hover:bg-slate-100"
+                      className="mr-2 flex items-center justify-center rounded-md text-slate-500 transition hover:bg-slate-100"  
                       onClick={() => document.getElementById('booking-date-range')?.showPicker?.() || document.getElementById('booking-date-range')?.focus()}
                       aria-label="Open calendar"
                     >
