@@ -10,6 +10,7 @@ import CreateUser from "./pages/public/CreateUser";
 import List_tour from './components/tour/List_tour';
 import CreateListGuide from './pages/admin/guides/CreateListGuide';
 import Overview from './pages/admin/bookings/Overview';
+import Bookings from './pages/admin/bookings/Bookings';
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
       <Route path="/destinations/create" element={<CreateDestination />} />
       <Route path="/guides" element={<CreateListGuide title="Guides" />} />
       <Route path="/schedules" element={<PlaceholderPage title="Schedules" />} />
-      <Route path="/bookings" element={<PlaceholderPage title="Bookings" />} />
+      <Route path="/bookings" element={<Bookings />} />
       <Route path="/customers" element={<PlaceholderPage title="Customers" />} />
       <Route path="/reviews" element={<PlaceholderPage title="Reviews" />} />
       <Route path="/reports" element={<PlaceholderPage title="Reports" />} />
