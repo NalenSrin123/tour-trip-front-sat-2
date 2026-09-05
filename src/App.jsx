@@ -16,6 +16,8 @@ import PromoBanner from './components/layout/PromoBanner'
 import PublicHeader from './components/layout/PublicHeader'
 import PublicFooter from './components/layout/PublicFooter'
 import ManageCustomers from './pages/admin/customers/ManageCustomers';
+import ListPayment from './components/payment/ListPayment';
+import PageReport from './pages/admin/reports/PageReport';
 
 function App() {
   return (
@@ -40,8 +42,8 @@ function App() {
       <Route path="/bookings" element={<Bookings />} />
       <Route path="/customers" element={<ManageCustomers/>} />
       <Route path="/reviews" element={<PlaceholderPage title="Reviews" />} />
-      <Route path="/reports" element={<PlaceholderPage title="Reports" />} />
-      <Route path="/payments" element={<PlaceholderPage title="Payments" />} />
+      <Route path="/reports" element={< PageReport/>} />
+      <Route path="/payments" element={<ListPayment/>}/>
       <Route path="/settings" element={<PlaceholderPage title="Settings" />} />
       <Route path="/help" element={<PlaceholderPage title="Help" />} />
       <Route path="/profile" element={<PlaceholderPage title="Profile" />} />

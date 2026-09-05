@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import {
   FaSearch,
   FaCalendarAlt,
@@ -12,8 +13,11 @@ import {
   FaUndo,
   FaArrowUp,
 } from "react-icons/fa";
+import AdminSidebar from "../layout/AdminSidebar";
+import AdminHeader from "../layout/AdminHeader";
 
 export default function ListPayment() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [payments] = useState([
     {
       id: "PMT-9001",
@@ -60,169 +64,175 @@ export default function ListPayment() {
   ]);
 
   return (
-    <div className="p-8 bg-[#f8fafc] min-h-screen text-[#0f172a]">
-      {/* Title Section */}
-      <h2 className="text-2xl font-bold text-[#0f172a] mb-1">
-        Payment Management
-      </h2>
-      <p className="text-sm text-slate-500 mb-6">
-        Track transactions, manage payouts, and monitor financial health.
-      </p>
+    <div className="bg-[#f4f6fb] min-h-screen text-slate-800">
+      <AdminSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <AdminHeader onMenuClick={() => setSidebarOpen(true)} />
+      <main className="md:ml-sidebar-width p-4 md:p-6 lg:p-8">
+        <div className="p-8 bg-[#f8fafc] min-h-screen text-[#0f172a]">
+          {/* Title Section */}
+          <h2 className="text-2xl font-bold text-[#0f172a] mb-1">
+            Payment Management
+          </h2>
+          <p className="text-sm text-slate-500 mb-6">
+            Track transactions, manage payouts, and monitor financial health.
+          </p>
 
-      {/* Top 4 Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6">
-        <SummaryCard
-          icon={<FaWallet className="text-[#2563eb] text-base" />}
-          iconBg="bg-blue-50"
-          title="Total Revenue"
-          value="$48,650"
-          badge="+15.8%"
-        />
-        <SummaryCard
-          icon={<FaCheckCircle className="text-[#10b981] text-base" />}
-          iconBg="bg-emerald-50"
-          title="Paid Amount"
-          value="$42,120"
-        />
-        <SummaryCard
-          icon={<FaClock className="text-[#8b5cf6] text-base" />}
-          iconBg="bg-purple-50"
-          title="Pending Payments"
-          value="$5,230"
-        />
-        <SummaryCard
-          icon={<FaUndo className="text-[#ef4444] text-base" />}
-          iconBg="bg-red-50"
-          title="Refunded / Failed"
-          value="$1,300"
-        />
-      </div>
-
-      {/* Main Container */}
-      <div className="bg-white rounded-2xl p-5 border border-slate-200/60 shadow-sm">
-        {/* Controls Bar */}
-        <div className="flex flex-wrap gap-3 mb-5 items-center">
-          <div className="relative flex-1 min-w-[280px]">
-            <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs" />
-            <input
-              type="text"
-              placeholder="Search by Payment ID, Booking ID..."
-              className="w-full pl-9 pr-3 py-2 text-xs bg-[#f8fafc] border border-slate-200 rounded-lg placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          {/* Top 4 Summary Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6">
+            <SummaryCard
+              icon={<FaWallet className="text-[#2563eb] text-base" />}
+              iconBg="bg-blue-50"
+              title="Total Revenue"
+              value="$48,650"
+              badge="+15.8%"
+            />
+            <SummaryCard
+              icon={<FaCheckCircle className="text-[#10b981] text-base" />}
+              iconBg="bg-emerald-50"
+              title="Paid Amount"
+              value="$42,120"
+            />
+            <SummaryCard
+              icon={<FaClock className="text-[#8b5cf6] text-base" />}
+              iconBg="bg-purple-50"
+              title="Pending Payments"
+              value="$5,230"
+            />
+            <SummaryCard
+              icon={<FaUndo className="text-[#ef4444] text-base" />}
+              iconBg="bg-red-50"
+              title="Refunded / Failed"
+              value="$1,300"
             />
           </div>
 
-          <div className="relative">
-            <FaCalendarAlt className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs" />
-            <input
-              type="text"
-              defaultValue="Aug 01 - Aug 31, 2024"
-              className="pl-9 pr-4 py-2 text-xs bg-[#f8fafc] border border-slate-200 rounded-lg text-slate-600 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
+          {/* Main Container */}
+          <div className="bg-white rounded-2xl p-5 border border-slate-200/60 shadow-sm">
+            {/* Controls Bar */}
+            <div className="flex flex-wrap gap-3 mb-5 items-center">
+              <div className="relative flex-1 min-w-[280px]">
+                <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs" />
+                <input
+                  type="text"
+                  placeholder="Search by Payment ID, Booking ID..."
+                  className="w-full pl-9 pr-3 py-2 text-xs bg-[#f8fafc] border border-slate-200 rounded-lg placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                />
+              </div>
+
+              <div className="relative">
+                <FaCalendarAlt className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs" />
+                <input
+                  type="text"
+                  defaultValue="Aug 01 - Aug 31, 2024"
+                  className="pl-9 pr-4 py-2 text-xs bg-[#f8fafc] border border-slate-200 rounded-lg text-slate-600 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                />
+              </div>
+
+              <div className="relative">
+                <select className="appearance-none pl-4 pr-9 py-2 text-xs bg-[#f8fafc] border border-slate-200 rounded-lg text-slate-700 font-medium focus:outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer">
+                  <option>Status: All</option>
+                  <option>Success</option>
+                  <option>Pending</option>
+                  <option>Refunded</option>
+                </select>
+                <FaChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none" />
+              </div>
+
+              <button className="flex items-center gap-2 px-4 py-2 text-xs bg-[#f8fafc] border border-slate-200 rounded-lg text-slate-700 font-semibold hover:bg-slate-100 transition">
+                <FaSlidersH className="text-slate-500 text-[10px]" />
+                More Filters
+              </button>
+            </div>
+
+            {/* Data Table */}
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr className="border-b border-slate-100 text-[11px] font-bold tracking-wider text-slate-500 uppercase">
+                    <th className="py-3 px-3">Payment ID</th>
+                    <th className="py-3 px-3">Booking ID</th>
+                    <th className="py-3 px-3">Customer</th>
+                    <th className="py-3 px-3">Payment Method</th>
+                    <th className="py-3 px-3">Amount</th>
+                    <th className="py-3 px-3">Date</th>
+                    <th className="py-3 px-3 text-right">Status</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100/80">
+                  {payments.map((p) => (
+                    <tr key={p.id} className="hover:bg-slate-50/50 transition">
+                      <td className="py-4 px-3 font-bold text-slate-900">{p.id}</td>
+                      <td className="py-4 px-3 font-semibold text-blue-600 hover:underline cursor-pointer">
+                        {p.bookingId}
+                      </td>
+                      <td className="py-4 px-3">
+                        <div className="flex items-center gap-2.5">
+                          <img
+                            src={p.avatar}
+                            alt={p.customer}
+                            className="w-7 h-7 rounded-full object-cover"
+                          />
+                          <span className="font-semibold text-slate-800">
+                            {p.customer}
+                          </span>
+                        </div>
+                      </td>
+
+                      {/* Payment Method with Image URL */}
+                      <td className="py-4 px-3">
+                        <div className="flex items-center gap-2.5">
+                          <img
+                            src={p.methodIcon}
+                            alt={p.method}
+                            className="w-6 h-6 object-contain rounded"
+                          />
+                          <span className="text-slate-700 font-medium text-xs">
+                            {p.method}
+                          </span>
+                        </div>
+                      </td>
+
+                      <td className="py-4 px-3 font-bold text-slate-900">
+                        ${p.amount.toFixed(2)}
+                      </td>
+                      <td className="py-4 px-3 text-slate-500">{p.date}</td>
+                      <td className="py-4 px-3 text-right">
+                        <StatusBadge status={p.status} />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Footer Pagination */}
+            <div className="flex flex-col sm:flex-row justify-between items-center mt-6 pt-2 text-xs text-slate-500 gap-4">
+              <p>Showing 1 to 3 of 1,240 entries</p>
+              <div className="flex items-center gap-1 font-medium">
+                <button className="w-7 h-7 flex items-center justify-center border border-slate-200 rounded-md text-slate-400 hover:bg-slate-50">
+                  <FaChevronLeft className="text-[10px]" />
+                </button>
+                <button className="w-7 h-7 rounded-md bg-blue-600 text-white font-bold flex items-center justify-center">
+                  1
+                </button>
+                <button className="w-7 h-7 rounded-md hover:bg-slate-100 text-slate-600 flex items-center justify-center">
+                  2
+                </button>
+                <button className="w-7 h-7 rounded-md hover:bg-slate-100 text-slate-600 flex items-center justify-center">
+                  3
+                </button>
+                <span className="px-1 text-slate-400">...</span>
+                <button className="w-7 h-7 rounded-md hover:bg-slate-100 text-slate-600 flex items-center justify-center">
+                  42
+                </button>
+                <button className="w-7 h-7 flex items-center justify-center border border-slate-200 rounded-md text-slate-600 hover:bg-slate-50">
+                  <FaChevronRight className="text-[10px]" />
+                </button>
+              </div>
+            </div>
           </div>
-
-          <div className="relative">
-            <select className="appearance-none pl-4 pr-9 py-2 text-xs bg-[#f8fafc] border border-slate-200 rounded-lg text-slate-700 font-medium focus:outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer">
-              <option>Status: All</option>
-              <option>Success</option>
-              <option>Pending</option>
-              <option>Refunded</option>
-            </select>
-            <FaChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none" />
-          </div>
-
-          <button className="flex items-center gap-2 px-4 py-2 text-xs bg-[#f8fafc] border border-slate-200 rounded-lg text-slate-700 font-semibold hover:bg-slate-100 transition">
-            <FaSlidersH className="text-slate-500 text-[10px]" />
-            More Filters
-          </button>
         </div>
-
-        {/* Data Table */}
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse text-xs">
-            <thead>
-              <tr className="border-b border-slate-100 text-[11px] font-bold tracking-wider text-slate-500 uppercase">
-                <th className="py-3 px-3">Payment ID</th>
-                <th className="py-3 px-3">Booking ID</th>
-                <th className="py-3 px-3">Customer</th>
-                <th className="py-3 px-3">Payment Method</th>
-                <th className="py-3 px-3">Amount</th>
-                <th className="py-3 px-3">Date</th>
-                <th className="py-3 px-3 text-right">Status</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100/80">
-              {payments.map((p) => (
-                <tr key={p.id} className="hover:bg-slate-50/50 transition">
-                  <td className="py-4 px-3 font-bold text-slate-900">{p.id}</td>
-                  <td className="py-4 px-3 font-semibold text-blue-600 hover:underline cursor-pointer">
-                    {p.bookingId}
-                  </td>
-                  <td className="py-4 px-3">
-                    <div className="flex items-center gap-2.5">
-                      <img
-                        src={p.avatar}
-                        alt={p.customer}
-                        className="w-7 h-7 rounded-full object-cover"
-                      />
-                      <span className="font-semibold text-slate-800">
-                        {p.customer}
-                      </span>
-                    </div>
-                  </td>
-
-                  {/* Payment Method with Image URL */}
-                  <td className="py-4 px-3">
-                    <div className="flex items-center gap-2.5">
-                      <img
-                        src={p.methodIcon}
-                        alt={p.method}
-                        className="w-6 h-6 object-contain rounded"
-                      />
-                      <span className="text-slate-700 font-medium text-xs">
-                        {p.method}
-                      </span>
-                    </div>
-                  </td>
-
-                  <td className="py-4 px-3 font-bold text-slate-900">
-                    ${p.amount.toFixed(2)}
-                  </td>
-                  <td className="py-4 px-3 text-slate-500">{p.date}</td>
-                  <td className="py-4 px-3 text-right">
-                    <StatusBadge status={p.status} />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Footer Pagination */}
-        <div className="flex flex-col sm:flex-row justify-between items-center mt-6 pt-2 text-xs text-slate-500 gap-4">
-          <p>Showing 1 to 3 of 1,240 entries</p>
-          <div className="flex items-center gap-1 font-medium">
-            <button className="w-7 h-7 flex items-center justify-center border border-slate-200 rounded-md text-slate-400 hover:bg-slate-50">
-              <FaChevronLeft className="text-[10px]" />
-            </button>
-            <button className="w-7 h-7 rounded-md bg-blue-600 text-white font-bold flex items-center justify-center">
-              1
-            </button>
-            <button className="w-7 h-7 rounded-md hover:bg-slate-100 text-slate-600 flex items-center justify-center">
-              2
-            </button>
-            <button className="w-7 h-7 rounded-md hover:bg-slate-100 text-slate-600 flex items-center justify-center">
-              3
-            </button>
-            <span className="px-1 text-slate-400">...</span>
-            <button className="w-7 h-7 rounded-md hover:bg-slate-100 text-slate-600 flex items-center justify-center">
-              42
-            </button>
-            <button className="w-7 h-7 flex items-center justify-center border border-slate-200 rounded-md text-slate-600 hover:bg-slate-50">
-              <FaChevronRight className="text-[10px]" />
-            </button>
-          </div>
-        </div>
-      </div>
+      </main>
     </div>
   );
 }
@@ -257,9 +267,8 @@ function StatusBadge({ status }) {
 
   return (
     <span
-      className={`inline-block px-3 py-1 rounded-full text-[11px] font-medium ${
-        styles[status] || "bg-slate-100 text-slate-600"
-      }`}
+      className={`inline-block px-3 py-1 rounded-full text-[11px] font-medium ${styles[status] || "bg-slate-100 text-slate-600"
+        }`}
     >
       {status}
     </span>
