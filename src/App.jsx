@@ -11,6 +11,9 @@ import List_tour from './components/tour/List_tour';
 import CreateListGuide from './pages/admin/guides/CreateListGuide';
 import Overview from './pages/admin/bookings/Overview';
 import Bookings from './pages/admin/bookings/Bookings';
+import PromoBanner from './components/layout/PromoBanner'
+import PublicHeader from './components/layout/PublicHeader'
+import PublicFooter from './components/layout/PublicFooter'
 
 function App() {
   return (
@@ -45,6 +48,21 @@ function App() {
       <Route path="/admin/add-new-tour" element={<AddNewTour />} />
       <Route path="/confirm-otp" element={<ConfirmOTP />} />
       <Route path="/create-user" element={<CreateUser />} />
+      <Route
+        path="/preview"
+        element={
+          <>
+            <PromoBanner
+              message="Summer Sale: Save 20% on all Cambodia tours."
+              ctaLabel="Explore Tours"
+              ctaHref="/tours"
+            />
+            <PublicHeader />
+            <main style={{ minHeight: '60vh' }} />
+            <PublicFooter />
+          </>
+        }
+      />
     </Routes>
   )
 }
