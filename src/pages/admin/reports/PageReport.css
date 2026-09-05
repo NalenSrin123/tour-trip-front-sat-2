@@ -1,0 +1,150 @@
+.reports-container {
+  min-height: 100vh;
+  background-color: #f8f9fc;
+  padding: 2rem;
+}
+
+.reports-wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Header: left text, right buttons */
+.reports-header {
+  display: flex;
+  justify-content: space-between; /* pushes left and right apart */
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.reports-header-left {
+  text-align: left;
+}
+
+.reports-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1e293b;
+}
+
+.reports-subtitle {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+}
+
+.reports-header-right {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn-outline {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  color: #334155;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #2563eb;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.icon-sm {
+  width: 16px;
+  height: 16px;
+}
+
+.icon-md {
+  width: 20px;
+  height: 20px;
+  color: #2563eb;
+}
+
+/* Stats grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.stat-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.stat-label {
+  font-size: 0.625rem;
+  font-weight: 500;
+  color: #64748b;
+  letter-spacing: 0.05em;
+}
+
+.stat-value {
+  margin-top: 0.25rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #1e293b;
+}
+
+.stat-icon {
+  background: #eff6ff;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.stat-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.stat-change {
+  font-size: 0.625rem;
+  font-weight: 500;
+  border-radius: 9999px;
+  padding: 0.25rem 0.5rem;
+}
+
+.stat-change.positive {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.stat-change.negative {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.stat-compare {
+  font-size: 0.625rem;
+  color: #94a3b8;
+}
