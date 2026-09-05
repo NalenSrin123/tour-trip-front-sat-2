@@ -97,6 +97,20 @@
   --text-headline-xl--line-height: 40px;
   --text-headline-xl--letter-spacing: -0.02em;
   --text-headline-xl--font-weight: 700;
+
+  /* --- Public site tokens (Header/Footer/PromoBanner) ---
+     Deliberately separate from the admin tokens above rather than reusing
+     them — this is a distinct marketing-site palette (teal accent, dark
+     navy footer) matched to the reference design, not the Material-3
+     admin console. Adding here rather than a second CSS file so Tailwind
+     only has one @theme block to process. */
+  --color-brand: #10b981;         /* teal-500 — primary accent, buttons, logo mark */
+  --color-brand-dark: #059669;    /* teal-600 — hover state for brand-colored buttons */
+  --color-ink: #0f172a;           /* slate-900 — headings, logo text */
+  --color-ink-muted: #475569;     /* slate-600 — body text, nav links */
+  --color-footer-bg: #1e293b;     /* slate-800 — footer background */
+  --color-footer-text: #94a3b8;   /* slate-400 — footer body text */
+  --spacing-header-height: 64px;
 }
 
 body {

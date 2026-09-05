@@ -5,6 +5,9 @@ import ForgotPassword from "./pages/public/ForgotPassword";
 import ResetPassword from "./pages/public/ResetPassword";
 import AddNewTour from "./pages/admin/bookings/AddNewTour";
 import ConfirmOTP from "./pages/public/ConfirmOTP";
+import PromoBanner from './components/layout/PromoBanner'
+import PublicHeader from './components/layout/PublicHeader'
+import PublicFooter from './components/layout/PublicFooter'
 
 function App() {
   return (
@@ -38,6 +41,21 @@ function App() {
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/admin/add-new-tour" element={<AddNewTour />} />
       <Route path="/confirm-otp" element={<ConfirmOTP />} />
+      <Route
+        path="/preview"
+        element={
+          <>
+            <PromoBanner
+              message="Summer Sale: Save 20% on all Cambodia tours."
+              ctaLabel="Explore Tours"
+              ctaHref="/tours"
+            />
+            <PublicHeader />
+            <main style={{ minHeight: '60vh' }} />
+            <PublicFooter />
+          </>
+        }
+      />
     </Routes>
   )
 }
