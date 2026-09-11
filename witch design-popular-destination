@@ -1,0 +1,52 @@
+[33m49ac860[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mdevelop[m[33m)[m Done design popular destination
+[33mc327e05[m[33m ([m[1;31morigin/develop[m[33m)[m Merge remote-tracking branch 'origin/PagecreateSchedult' into develop
+[33mdcbcc2e[m Merge remote-tracking branch 'origin/create-header-footer' into develop
+[33m398657e[m Merge remote-tracking branch 'origin/feature/list-guides' into develop
+[33m233eaa5[m Merge remote-tracking branch 'origin/feature/manage-customers' into develop
+[33m99f7b80[m Merge remote-tracking branch 'origin/listpayment' into develop
+[33mce22f65[m Merge remote-tracking branch 'origin/design-update-booking' into develop
+[33m12a5dbe[m Merge remote-tracking branch 'origin/Create_PageReport' into develop
+[33m3a6f885[m Merge remote-tracking branch 'origin/link-page-in-dashboard' into develop
+[33m96e3efc[m[33m ([m[1;31morigin/PagecreateSchedult[m[33m)[m PagecreateSchedult
+[33m2760310[m[33m ([m[1;31morigin/listpayment[m[33m, [m[1;32mlistpayment[m[33m)[m Done listpayment
+[33m347ef88[m[33m ([m[1;31morigin/create-header-footer[m[33m)[m feat: add public header, footer, and promo banner
+[33mb7f7e80[m[33m ([m[1;31morigin/Create_PageReport[m[33m)[m Done my work about Create_PageReport
+[33m940a9bf[m[33m ([m[1;31morigin/link-page-in-dashboard[m[33m)[m add link
+[33mfb13f14[m[33m ([m[1;31morigin/Create-user[m[33m)[m Design-page-Craete-user
+[33m3858421[m[33m ([m[1;31morigin/design-update-booking[m[33m)[m design-update-booking
+[33m00b2c94[m[33m ([m[1;31morigin/feature/manage-customers[m[33m)[m Merge remote changes and resolve conflicts
+[33m8fc3220[m ManageCustomers
+[33m928db2f[m ManageCostumers
+[33m75f6c4e[m ManageCustomers
+[33mb4c3fb1[m fix
+[33mad61581[m Merge remote-tracking branch 'origin/Create-ConfirmOTP' into develop
+[33m2d390cf[m Merge remote-tracking branch 'origin/create-addnewtour-page' into develop
+[33m5285a3a[m Merge remote-tracking branch 'origin/Manage-Destinations' into develop
+[33m578ac5b[m[33m ([m[1;31morigin/Create-ConfirmOTP[m[33m)[m Done to create form confirm-otp
+[33m2bdbea8[m Merge remote-tracking branch 'origin/feature-nav-and-sidebar' into develop
+[33m104b4fe[m Merge remote-tracking branch 'origin/design-overview-page' into develop
+[33mbc6960a[m Merge remote-tracking branch 'origin/create-list-guide' into develop
+[33m214f9b5[m Merge remote-tracking branch 'origin/create-forgotpassword-page' into develop
+[33m67f38eb[m Merge remote-tracking branch 'origin/Design-page-for-list-tour' into develop
+[33m0effc88[m Merge remote-tracking branch 'origin/design-create-destination-page' into develop
+[33m301b403[m[33m ([m[1;31morigin/create-forgotpassword-page[m[33m)[m Last Update
+[33m410aa2c[m ConfirmOTP
+[33md85ae2d[m Update ResetPassword file with latest changes
+[33meeb9a4e[m[33m ([m[1;31morigin/feature/list-guides[m[33m)[m feature: list guides page
+[33m98ca8e5[m[33m ([m[1;31morigin/create-addnewtour-page[m[33m)[m Update
+[33m5c94bae[m done create-addnewtour-page
+[33m6b2d91a[m[33m ([m[1;31morigin/Manage-Destinations[m[33m)[m Manage Destinations
+[33mb15d8c4[m[33m ([m[1;31morigin/feature-nav-and-sidebar[m[33m)[m create sidebar component
+[33m1017813[m create navbar and sidebar component
+[33m346a8d5[m[33m ([m[1;31morigin/design-overview-page[m[33m, [m[1;32mdesign-overview-page[m[33m)[m done design overview page
+[33m9228074[m Update ResetPassword and ForgotPassword forms with scaling and pill-style button
+[33m9b086c1[m[33m ([m[1;31morigin/create-list-guide[m[33m)[m remove import create list guide from main
+[33me43c524[m Create List Guides
+[33m22baa08[m[33m ([m[1;31morigin/Design-page-for-list-tour[m[33m)[m Design page for list tour
+[33m73a2113[m[33m ([m[1;31morigin/design-create-destination-page[m[33m)[m design create destination page
+[33madbeced[m[33m ([m[1;31morigin/create-login-page[m[33m)[m create-login-page
+[33m8a68a36[m Merge branch 'main' into develop
+[33m92e0510[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/list-category[m[33m, [m[1;31morigin/design-popular-destination[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m, [m[1;32mdesign-popular-destination[m[33m)[m set up tailwind
+[33m42aabce[m setup tailwind
+[33mc78dd88[m create folder structure template
+[33mb49cac2[m first commit
