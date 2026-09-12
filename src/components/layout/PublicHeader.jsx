@@ -76,7 +76,7 @@ export default function PublicHeader({ isAuthenticated = false, user, wishlistCo
 
   return (
     <header ref={headerRef} className="bg-white sticky top-0 z-40 border-b border-slate-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-header-height flex items-center justify-between gap-4">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 h-header-height flex items-center justify-between gap-4">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 flex-shrink-0">
           <span className="w-8 h-8 rounded-lg bg-brand text-white flex items-center justify-center">

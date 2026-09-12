@@ -26,7 +26,7 @@ export default function PublicFooter() {
 
   return (
     <footer className="bg-footer-bg text-footer-text">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
         {/* Brand column */}
         <div>
           <Link to="/" className="flex items-center gap-2 mb-3">
@@ -86,7 +86,7 @@ export default function PublicFooter() {
 
       {/* Bottom bar */}
       <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
           <p>© {year} TourBook. All rights reserved.</p>
           <div className="flex items-center gap-6">
             {LEGAL_LINKS.map((link) => (
