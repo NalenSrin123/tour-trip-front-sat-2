@@ -21,8 +21,8 @@ import PageReport from './pages/admin/reports/PageReport';
 import DegsignSectionExpolore from './pages/public/DesignSectionExplore'
 import TourDetailTop from './components/tour/TourDetailTop'
 import CustomerReview from './pages/public/CustomerReview';
-import ListCategory from "./pages/admin/categories/ListCategory";
-
+import ListCategory from "./pages/admin/categories/listcategory"
+import ListGuides from './pages/admin/guides/ListGuides';
 function App() {
   return (
     <Routes>
@@ -41,7 +41,7 @@ function App() {
         }
       />
       <Route path="/destinations/create" element={<CreateDestination />} />
-      <Route path="/guides" element={<CreateListGuide title="Guides" />} />
+      <Route path="/guides" element={<ListGuides title="Guides" />} />
       <Route path="/schedules" element={<ScheduleFormPage />} />
       <Route path="/bookings" element={<Bookings />} />
       <Route path="/customers" element={<ManageCustomers/>} />
