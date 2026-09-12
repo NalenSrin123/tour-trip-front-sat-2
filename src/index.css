@@ -57,6 +57,9 @@
   --color-inverse-on-surface: #eef1f7;
   --color-surface-tint: #005bc0;
 
+  /* color title for public site */
+  --color-title: #1a2b4b;
+
   /* Spacing tokens */
   --spacing-base: 4px;
   --spacing-xs: 8px;

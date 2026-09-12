@@ -20,11 +20,12 @@ import ListPayment from './components/payment/ListPayment';
 import PageReport from './pages/admin/reports/PageReport';
 import DegsignSectionExpolore from './pages/public/DesignSectionExplore'
 import TourDetailTop from './components/tour/TourDetailTop'
+import CustomerReview from './pages/public/CustomerReview';
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Overview title="Dashboard" />} />
+      <Route path="/" element={<CustomerReview title="Dashboard" />} />
       <Route path="/tours" element={<List_tour title="Tours" />} />
       <Route path="/categories" element={<PlaceholderPage title="Categories" />} />
       <Route
