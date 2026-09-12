@@ -14,6 +14,7 @@ import Bookings from './pages/admin/bookings/Bookings';
 import PromoBanner from './components/layout/PromoBanner'
 import PublicHeader from './components/layout/PublicHeader'
 import PublicFooter from './components/layout/PublicFooter'
+import TourDetailTop from './components/tour/TourDetailTop'
 
 function App() {
   return (
@@ -63,6 +64,16 @@ function App() {
           </>
         }
       />
+      <Route
+  path="/preview-tour"
+  element={
+    <>
+      <PublicHeader />
+      <TourDetailTop />
+      <PublicFooter />
+    </>
+  }
+/>
     </Routes>
   )
 }
