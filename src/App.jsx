@@ -21,6 +21,7 @@ import PageReport from './pages/admin/reports/PageReport';
 import DegsignSectionExpolore from './pages/public/DesignSectionExplore'
 import TourDetailTop from './components/tour/TourDetailTop'
 import CustomerReview from './pages/public/CustomerReview';
+import ListCategory from "./pages/admin/categories/ListCategory";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
       <Route path="/confirm-otp" element={<ConfirmOTP />} />
       <Route path="/create-user" element={<CreateUser />} />
       <Route path="/design-section-explore" element={ <DegsignSectionExpolore /> } />
+      <Route path="/list-category" element={<ListCategory />} />
       <Route
         path="/preview"
         element={
