@@ -19,6 +19,7 @@ import ManageCustomers from './pages/admin/customers/ManageCustomers';
 import ListPayment from './components/payment/ListPayment';
 import PageReport from './pages/admin/reports/PageReport';
 import DegsignSectionExpolore from './pages/public/DesignSectionExplore'
+import TourDetailTop from './components/tour/TourDetailTop'
 
 function App() {
   return (
@@ -69,6 +70,16 @@ function App() {
           </>
         }
       />
+      <Route
+  path="/preview-tour"
+  element={
+    <>
+      <PublicHeader />
+      <TourDetailTop />
+      <PublicFooter />
+    </>
+  }
+/>
     </Routes>
   )
 }
