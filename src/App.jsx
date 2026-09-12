@@ -18,6 +18,7 @@ import PublicFooter from './components/layout/PublicFooter'
 import ManageCustomers from './pages/admin/customers/ManageCustomers';
 import ListPayment from './components/payment/ListPayment';
 import PageReport from './pages/admin/reports/PageReport';
+import DegsignSectionExpolore from './pages/public/DesignSectionExplore'
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
       <Route path="/admin/add-new-tour" element={<AddNewTour />} />
       <Route path="/confirm-otp" element={<ConfirmOTP />} />
       <Route path="/create-user" element={<CreateUser />} />
+      <Route path="/design-section-explore" element={ <DegsignSectionExpolore /> } />
       <Route
         path="/preview"
         element={
