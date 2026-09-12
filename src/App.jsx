@@ -14,12 +14,13 @@ import Bookings from './pages/admin/bookings/Bookings';
 import PromoBanner from './components/layout/PromoBanner'
 import PublicHeader from './components/layout/PublicHeader'
 import PublicFooter from './components/layout/PublicFooter'
+import CustomerReview from './pages/public/CustomerReview';
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Overview title="Dashboard" />} />
-      <Route path="/tours" element={<List_tour title="Tours" />} />
+      <Route path="/" element={<CustomerReview title="Dashboard" />} />
+      {/* <Route path="/tours" element={<List_tour title="Tours" />} />
       <Route path="/categories" element={<PlaceholderPage title="Categories" />} />
       <Route
   path="/destinations"
@@ -31,8 +32,8 @@ function App() {
       actionLabel="Create Destination"
     />
   }
-/>
-      <Route path="/destinations/create" element={<CreateDestination />} />
+/> */}
+      {/* <Route path="/destinations/create" element={<CreateDestination />} />
       <Route path="/guides" element={<CreateListGuide title="Guides" />} />
       <Route path="/schedules" element={<PlaceholderPage title="Schedules" />} />
       <Route path="/bookings" element={<Bookings />} />
@@ -62,7 +63,7 @@ function App() {
             <PublicFooter />
           </>
         }
-      />
+      /> */}
     </Routes>
   )
 }
