@@ -23,6 +23,7 @@ import TourDetailTop from './components/tour/TourDetailTop'
 import CustomerReview from './pages/public/CustomerReview';
 import ListCategory from "./pages/admin/categories/listcategory"
 import ListGuides from './pages/admin/guides/ListGuides';
+import Setting from './pages/admin/settings/Setting';
 function App() {
   return (
     <Routes>
@@ -48,7 +49,7 @@ function App() {
       <Route path="/reviews" element={<PlaceholderPage title="Reviews" />} />
       <Route path="/reports" element={< PageReport/>} />
       <Route path="/payments" element={<ListPayment/>}/>
-      <Route path="/settings" element={<PlaceholderPage title="Settings" />} />
+      <Route path="/settings" element={<Setting />} />
       <Route path="/help" element={<PlaceholderPage title="Help" />} />
       <Route path="/profile" element={<PlaceholderPage title="Profile" />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
