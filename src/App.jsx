@@ -23,11 +23,10 @@ import TourDetailTop from './components/tour/TourDetailTop'
 import CustomerReview from './pages/public/CustomerReview';
 import ListCategory from "./pages/admin/categories/listcategory"
 import ListGuides from './pages/admin/guides/ListGuides';
-import TheLensAndExplore from './pages/public/DestinationDetailTheLensAndExplore';
 function App() {
   return (
     <Routes>
-      {/* <Route path="/" element={<CustomerReview title="Dashboard" />} />
+      <Route path="/" element={<PlaceholderPage title="Dashboard" />} />
       <Route path="/tours" element={<List_tour title="Tours" />} />
       <Route path="/categories" element={<PlaceholderPage title="Categories" />} />
       <Route
@@ -83,9 +82,7 @@ function App() {
       <PublicFooter />
     </>
   }
-/> */}
-
- <Route path="/" element={<TheLensAndExplore title="Dashboard" />} />
+/>
     </Routes>
   )
 }
