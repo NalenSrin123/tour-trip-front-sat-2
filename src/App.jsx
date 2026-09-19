@@ -26,6 +26,7 @@ import ListGuides from './pages/admin/guides/ListGuides';
 import ListSchedule from './pages/admin/schedules/Listschedule'
 import Setting from './pages/admin/settings/Setting';
 import AddBooking from './pages/admin/bookings/AddBooking';
+import Destination from './pages/public/detination/Destination';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           />
         }
       />
+      <Route path="/detination" element={<Destination />} />
       <Route path="/destinations/create" element={<CreateDestination />} />
       <Route path="/guides" element={<CreateListGuide title="Guides" />} />
       <Route path="/schedules" element={<ListSchedule />} />
