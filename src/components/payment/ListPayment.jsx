@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import {
   FaSearch,
   FaCalendarAlt,
@@ -80,26 +79,26 @@ export default function ListPayment() {
           {/* Top 4 Summary Cards */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6">
             <SummaryCard
-              icon={<FaWallet className="text-[#2563eb] text-base" />}
+              icon={<WalletIcon className="text-[#2563eb] text-base" />}
               iconBg="bg-blue-50"
               title="Total Revenue"
               value="$48,650"
               badge="+15.8%"
             />
             <SummaryCard
-              icon={<FaCheckCircle className="text-[#10b981] text-base" />}
+              icon={<CheckCircleIcon className="text-[#10b981] text-base" />}
               iconBg="bg-emerald-50"
               title="Paid Amount"
               value="$42,120"
             />
             <SummaryCard
-              icon={<FaClock className="text-[#8b5cf6] text-base" />}
+              icon={<ClockIcon className="text-[#8b5cf6] text-base" />}
               iconBg="bg-purple-50"
               title="Pending Payments"
               value="$5,230"
             />
             <SummaryCard
-              icon={<FaUndo className="text-[#ef4444] text-base" />}
+              icon={<ArrowPathIcon className="text-[#ef4444] text-base" />}
               iconBg="bg-red-50"
               title="Refunded / Failed"
               value="$1,300"
@@ -111,7 +110,7 @@ export default function ListPayment() {
             {/* Controls Bar */}
             <div className="flex flex-wrap gap-3 mb-5 items-center">
               <div className="relative flex-1 min-w-[280px]">
-                <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs" />
+                <SearchIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs" />
                 <input
                   type="text"
                   placeholder="Search by Payment ID, Booking ID..."
@@ -120,7 +119,7 @@ export default function ListPayment() {
               </div>
 
               <div className="relative">
-                <FaCalendarAlt className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs" />
+                <CalendarDaysIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs" />
                 <input
                   type="text"
                   defaultValue="Aug 01 - Aug 31, 2024"
@@ -135,11 +134,11 @@ export default function ListPayment() {
                   <option>Pending</option>
                   <option>Refunded</option>
                 </select>
-                <FaChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none" />
+                <ChevronDownIcon className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none" />
               </div>
 
               <button className="flex items-center gap-2 px-4 py-2 text-xs bg-[#f8fafc] border border-slate-200 rounded-lg text-slate-700 font-semibold hover:bg-slate-100 transition">
-                <FaSlidersH className="text-slate-500 text-[10px]" />
+                <AdjustmentsHorizontalIcon className="text-slate-500 text-[10px]" />
                 More Filters
               </button>
             </div>
@@ -210,7 +209,7 @@ export default function ListPayment() {
               <p>Showing 1 to 3 of 1,240 entries</p>
               <div className="flex items-center gap-1 font-medium">
                 <button className="w-7 h-7 flex items-center justify-center border border-slate-200 rounded-md text-slate-400 hover:bg-slate-50">
-                  <FaChevronLeft className="text-[10px]" />
+                  <ChevronLeftIcon className="text-[10px]" />
                 </button>
                 <button className="w-7 h-7 rounded-md bg-blue-600 text-white font-bold flex items-center justify-center">
                   1
@@ -226,7 +225,7 @@ export default function ListPayment() {
                   42
                 </button>
                 <button className="w-7 h-7 flex items-center justify-center border border-slate-200 rounded-md text-slate-600 hover:bg-slate-50">
-                  <FaChevronRight className="text-[10px]" />
+                  <ChevronRightIcon className="text-[10px]" />
                 </button>
               </div>
             </div>
@@ -244,7 +243,7 @@ function SummaryCard({ icon, iconBg, title, value, badge }) {
         <div className={`p-2.5 rounded-xl ${iconBg}`}>{icon}</div>
         {badge && (
           <span className="flex items-center gap-1 bg-emerald-50 text-emerald-600 text-[11px] font-bold px-2 py-0.5 rounded-full border border-emerald-100">
-            <FaArrowUp className="text-[9px]" /> {badge}
+            <ArrowUpIcon className="text-[9px]" /> {badge}
           </span>
         )}
       </div>

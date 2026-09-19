@@ -25,6 +25,7 @@ import ListCategory from "./pages/admin/categories/listcategory"
 import ListGuides from './pages/admin/guides/ListGuides';
 import ListSchedule from './pages/admin/schedules/ListSchedule'
 import ScheduleFormPage from './pages/admin/schedules/ScheduleFormPage'
+import Setting from './pages/admin/settings/Setting';
 function App() {
   return (
     <Routes>
@@ -51,7 +52,7 @@ function App() {
       <Route path="/reviews" element={<PlaceholderPage title="Reviews" />} />
       <Route path="/reports" element={< PageReport/>} />
       <Route path="/payments" element={<ListPayment/>}/>
-      <Route path="/settings" element={<PlaceholderPage title="Settings" />} />
+      <Route path="/settings" element={<Setting />} />
       <Route path="/help" element={<PlaceholderPage title="Help" />} />
       <Route path="/profile" element={<PlaceholderPage title="Profile" />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
