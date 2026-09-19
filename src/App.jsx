@@ -26,6 +26,8 @@ import ListGuides from './pages/admin/guides/ListGuides';
 import ListSchedule from './pages/admin/schedules/ListSchedule'
 import ScheduleFormPage from './pages/admin/schedules/ScheduleFormPage'
 import Setting from './pages/admin/settings/Setting';
+import AddBooking from './pages/admin/bookings/AddBooking';
+
 function App() {
   return (
     <Routes>
@@ -62,6 +64,7 @@ function App() {
       <Route path="/create-user" element={<CreateUser />} />
       <Route path="/design-section-explore" element={ <DegsignSectionExpolore /> } />
       <Route path="/list-category" element={<ListCategory />} />
+      <Route path="/bookings/add" element={ <AddBooking /> } />
       <Route
         path="/preview"
         element={

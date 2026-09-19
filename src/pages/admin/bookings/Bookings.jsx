@@ -74,13 +74,13 @@ function Bookings() {
                 <span className="material-symbols-outlined text-base">download</span>
                 Export
               </button>
-              <button
-                type="button"
+              <Link
+                to="/bookings/add"
                 className="inline-flex items-center gap-2 rounded-lg bg-[#1a52ce] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[#1f5fe8]"
               >
                 <span className="material-symbols-outlined text-base">add</span>
                 New Booking
-              </button>
+              </Link>
             </div>
           </div>
 
