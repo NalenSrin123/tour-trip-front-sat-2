@@ -30,7 +30,7 @@ import AddBooking from './pages/admin/bookings/AddBooking';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<PlaceholderPage title="Dashboard" />} />
+      <Route path="/" element={<Overview/>} />
       <Route path="/tours" element={<List_tour title="Tours" />} />
       <Route path="/categories" element={<PlaceholderPage title="Categories" />} />
       <Route
