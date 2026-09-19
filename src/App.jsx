@@ -20,12 +20,14 @@ import ListPayment from './components/payment/ListPayment';
 import PageReport from './pages/admin/reports/PageReport';
 import DegsignSectionExpolore from './pages/public/DesignSectionExplore'
 import TourDetailTop from './components/tour/TourDetailTop'
-import CustomerReview from './pages/public/CustomerReview';
+// import CustomerReview from './pages/public/CustomerReview';
 import ListCategory from "./pages/admin/categories/listcategory"
 import ListGuides from './pages/admin/guides/ListGuides';
 import ListSchedule from './pages/admin/schedules/Listschedule'
 import Setting from './pages/admin/settings/Setting';
 import AddBooking from './pages/admin/bookings/AddBooking';
+import ReviewsManagement from './pages/admin/reviews/ReviewsManagement';
+import ProfilePage from './pages/admin/profile/user_profile';
 
 function App() {
   return (
@@ -51,12 +53,12 @@ function App() {
       <Route path="/schedules/create" element={<ScheduleFormPage />} />
       <Route path="/bookings" element={<Bookings />} />
       <Route path="/customers" element={<ManageCustomers/>} />
-      <Route path="/reviews" element={<PlaceholderPage title="Reviews" />} />
+      <Route path="/reviews" element={< ReviewsManagement />} />
       <Route path="/reports" element={< PageReport/>} />
       <Route path="/payments" element={<ListPayment/>}/>
       <Route path="/settings" element={<Setting />} />
       <Route path="/help" element={<PlaceholderPage title="Help" />} />
-      <Route path="/profile" element={<PlaceholderPage title="Profile" />} />
+      <Route path="/profile" element={< ProfilePage/>} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/admin/add-new-tour" element={<AddNewTour />} />
