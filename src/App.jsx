@@ -23,6 +23,8 @@ import TourDetailTop from './components/tour/TourDetailTop'
 import CustomerReview from './pages/public/CustomerReview';
 import ListCategory from "./pages/admin/categories/listcategory"
 import ListGuides from './pages/admin/guides/ListGuides';
+import ListSchedule from './pages/admin/schedules/ListSchedule'
+import ScheduleFormPage from './pages/admin/schedules/ScheduleFormPage'
 function App() {
   return (
     <Routes>
@@ -41,8 +43,9 @@ function App() {
         }
       />
       <Route path="/destinations/create" element={<CreateDestination />} />
-      <Route path="/guides" element={<ListGuides title="Guides" />} />
-      <Route path="/schedules" element={<ScheduleFormPage />} />
+      <Route path="/guides" element={<CreateListGuide title="Guides" />} />
+      <Route path="/schedules" element={<ListSchedule />} />
+      <Route path="/schedules/create" element={<ScheduleFormPage />} />
       <Route path="/bookings" element={<Bookings />} />
       <Route path="/customers" element={<ManageCustomers/>} />
       <Route path="/reviews" element={<PlaceholderPage title="Reviews" />} />

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Calendar, Clock, Globe, ArrowLeft } from 'lucide-react';
 import AdminSidebar from '../../../components/layout/AdminSidebar';
 import AdminHeader from '../../../components/layout/AdminHeader';
 
 const ScheduleFormPage = ({ isEditMode = false, initialData = null, onBack, onSubmit }) => {
+  const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [formData, setFormData] = useState({
     tour: '',
@@ -50,7 +52,13 @@ const ScheduleFormPage = ({ isEditMode = false, initialData = null, onBack, onSu
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData, isEditMode);
+
+    if (onSubmit) {
+      onSubmit(formData, isEditMode);
+      return;
+    }
+
+    navigate('/schedules');
   };
 
   return (
