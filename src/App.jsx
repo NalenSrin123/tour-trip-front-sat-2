@@ -1,38 +1,43 @@
-import { Routes, Route } from 'react-router-dom'
-import PlaceholderPage from './components/layout/PlaceholderPage'
-import CreateDestination from './pages/admin/destinations/CreateDestination'
-import ManageDestinations from './pages/admin/destinations/ManageDestinations'
+import { Routes, Route } from "react-router-dom";
+import PlaceholderPage from "./components/layout/PlaceholderPage";
+import CreateDestination from "./pages/admin/destinations/CreateDestination";
+import ManageDestinations from "./pages/admin/destinations/ManageDestinations";
 import ForgotPassword from "./pages/public/ForgotPassword";
 import ResetPassword from "./pages/public/ResetPassword";
 import AddNewTour from "./pages/admin/bookings/AddNewTour";
 import ConfirmOTP from "./pages/public/ConfirmOTP";
 import CreateUser from "./pages/public/CreateUser";
-import List_tour from './components/tour/List_tour';
-import CreateListGuide from './pages/admin/guides/CreateListGuide';
-import ScheduleFormPage from './pages/admin/schedules/ScheduleFormPage';
-import Overview from './pages/admin/bookings/Overview';
-import Bookings from './pages/admin/bookings/Bookings';
-import PromoBanner from './components/layout/PromoBanner'
-import PublicHeader from './components/layout/PublicHeader'
-import PublicFooter from './components/layout/PublicFooter'
-import ManageCustomers from './pages/admin/customers/ManageCustomers';
-import ListPayment from './components/payment/ListPayment';
-import PageReport from './pages/admin/reports/PageReport';
-import DegsignSectionExpolore from './pages/public/DesignSectionExplore'
-import TourDetailTop from './components/tour/TourDetailTop'
-import CustomerReview from './pages/public/CustomerReview';
-import ListCategory from "./pages/admin/categories/listcategory"
-import ListGuides from './pages/admin/guides/ListGuides';
-import ListSchedule from './pages/admin/schedules/Listschedule'
-import Setting from './pages/admin/settings/Setting';
-import AddBooking from './pages/admin/bookings/AddBooking';
+import List_tour from "./components/tour/List_tour";
+import CreateListGuide from "./pages/admin/guides/CreateListGuide";
+import ScheduleFormPage from "./pages/admin/schedules/ScheduleFormPage";
+import Overview from "./pages/admin/bookings/Overview";
+import Bookings from "./pages/admin/bookings/Bookings";
+import PromoBanner from "./components/layout/PromoBanner";
+import PublicHeader from "./components/layout/PublicHeader";
+import MoreInspiration from "./components/tour/moreInspiration";
+import PublicFooter from "./components/layout/PublicFooter";
+import ManageCustomers from "./pages/admin/customers/ManageCustomers";
+import ListPayment from "./components/payment/ListPayment";
+import PageReport from "./pages/admin/reports/PageReport";
+import DegsignSectionExpolore from "./pages/public/DesignSectionExplore";
+import TourDetailTop from "./components/tour/TourDetailTop";
+import CustomerReview from "./pages/public/CustomerReview";
+import ListCategory from "./pages/admin/categories/listcategory";
+import ListGuides from "./pages/admin/guides/ListGuides";
+import ListSchedule from "./pages/admin/schedules/Listschedule";
+import Setting from "./pages/admin/settings/Setting";
+import AddBooking from "./pages/admin/bookings/AddBooking";
+import InspirationDetail from "./components/tour/InspirationDetail";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<PlaceholderPage title="Dashboard" />} />
       <Route path="/tours" element={<List_tour title="Tours" />} />
-      <Route path="/categories" element={<PlaceholderPage title="Categories" />} />
+      <Route
+        path="/categories"
+        element={<PlaceholderPage title="Categories" />}
+      />
       <Route
         path="/destinations"
         element={
@@ -49,10 +54,10 @@ function App() {
       <Route path="/schedules" element={<ListSchedule />} />
       <Route path="/schedules/create" element={<ScheduleFormPage />} />
       <Route path="/bookings" element={<Bookings />} />
-      <Route path="/customers" element={<ManageCustomers/>} />
+      <Route path="/customers" element={<ManageCustomers />} />
       <Route path="/reviews" element={<PlaceholderPage title="Reviews" />} />
-      <Route path="/reports" element={< PageReport/>} />
-      <Route path="/payments" element={<ListPayment/>}/>
+      <Route path="/reports" element={<PageReport />} />
+      <Route path="/payments" element={<ListPayment />} />
       <Route path="/settings" element={<Setting />} />
       <Route path="/help" element={<PlaceholderPage title="Help" />} />
       <Route path="/profile" element={<PlaceholderPage title="Profile" />} />
@@ -61,9 +66,14 @@ function App() {
       <Route path="/admin/add-new-tour" element={<AddNewTour />} />
       <Route path="/confirm-otp" element={<ConfirmOTP />} />
       <Route path="/create-user" element={<CreateUser />} />
-      <Route path="/design-section-explore" element={ <DegsignSectionExpolore /> } />
+      <Route
+        path="/design-section-explore"
+        element={<DegsignSectionExpolore />}
+      />
       <Route path="/list-category" element={<ListCategory />} />
-      <Route path="/bookings/add" element={ <AddBooking /> } />
+      <Route path="/bookings/add" element={<AddBooking />} />
+      <Route path="/inspiration/:id" element={<InspirationDetail />} />
+      <Route path="/inspiration-detail" element={<InspirationDetail />} />
       <Route
         path="/preview"
         element={
@@ -74,23 +84,33 @@ function App() {
               ctaHref="/tours"
             />
             <PublicHeader />
-            <main style={{ minHeight: '60vh' }} />
+            <main style={{ minHeight: "60vh" }} />
             <PublicFooter />
           </>
         }
       />
       <Route
-  path="/preview-tour"
-  element={
-    <>
-      <PublicHeader />
-      <TourDetailTop />
-      <PublicFooter />
-    </>
-  }
-/>
+        path="/preview-tour"
+        element={
+          <>
+            <PublicHeader />
+            <TourDetailTop />
+            <PublicFooter />
+          </>
+        }
+      />
+      <Route
+        path="/preview-moreinspiration"
+        element={
+          <>
+            <PublicHeader />
+            <MoreInspiration />
+            <PublicFooter />
+          </>
+        }
+      />
     </Routes>
-  )
+  );
 }
 
 export default App;
