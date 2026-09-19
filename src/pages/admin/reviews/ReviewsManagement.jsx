@@ -182,10 +182,12 @@ export default function ReviewsManagement() {
               md: "row",
             }}
             spacing={2}
-            sx={{justifyContent: "space-between", alignItems: {
-              xs: "stretch",
-              md: "center",
-            }, 
+            sx={{
+              justifyContent: "space-between",
+              alignItems: {
+                xs: "stretch",
+                md: "center",
+              },
               width: "100%",
               mb: 2.5,
             }}
@@ -366,10 +368,11 @@ export default function ReviewsManagement() {
                 md: "row",
               }}
               spacing={1.5}
-              sx={{alignItems: {
-                xs: "stretch",
-                md: "flex-end",
-              }, 
+              sx={{
+                alignItems: {
+                  xs: "stretch",
+                  md: "flex-end",
+                },
                 width: "100%",
               }}
             >
@@ -667,7 +670,10 @@ export default function ReviewsManagement() {
                           px: 1.5,
                         }}
                       >
-                        <Stack sx={{ alignItems: "center" }}
+                        <Stack
+                          sx={{
+                            alignItems: "center",
+                          }}
                           direction="row"
                           spacing={1}
                         >
@@ -739,7 +745,9 @@ export default function ReviewsManagement() {
                           px: 1.5,
                         }}
                       >
-                        <Stack direction="row">
+                        <Stack
+                          direction="row"
+                        >
                           {[1, 2, 3, 4, 5].map((star) => (
                             <Star
                               key={star}
@@ -878,18 +886,16 @@ export default function ReviewsManagement() {
                 sm: "row",
               }}
               spacing={1}
-              sx={{justifyContent: "space-between", alignItems: {
-                xs: "flex-start",
-                sm: "center",
-              }, 
+              sx={{
+                justifyContent: "space-between",
+                alignItems: {
+                  xs: "flex-start",
+                  sm: "center",
+                },
                 width: "100%",
-
                 boxSizing: "border-box",
-
                 px: 1.5,
-
                 py: 1.3,
-
                 borderTop: "1px solid #EDF0F5",
               }}
             >
