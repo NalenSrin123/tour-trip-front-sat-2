@@ -20,6 +20,7 @@ import ListPayment from './components/payment/ListPayment';
 import PageReport from './pages/admin/reports/PageReport';
 import DegsignSectionExpolore from './pages/public/DesignSectionExplore'
 import AddBooking from './pages/admin/bookings/AddBooking';
+import InspirationDetail from './components/tour/InspirationDetail';
 
 function App() {
   return (
@@ -56,6 +57,8 @@ function App() {
       <Route path="/create-user" element={<CreateUser />} />
       <Route path="/design-section-explore" element={ <DegsignSectionExpolore /> } />
       <Route path="/bookings/add" element={ <AddBooking /> } />
+      <Route path="/InspirationDetail" element={ <InspirationDetail/> } />
+
       <Route
         path="/preview"
         element={
