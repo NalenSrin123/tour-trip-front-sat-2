@@ -53,7 +53,7 @@ function StatCard({ title, value, icon, change, negative }) {
         borderRadius: 2,
       }}
     >
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
+      <Stack sx={{ justifyContent: "space-between", alignItems: "center" }} direction="row"  >
         <Typography
           sx={{
             fontSize: 8,
@@ -91,7 +91,7 @@ function StatCard({ title, value, icon, change, negative }) {
         {value}
       </Typography>
 
-      <Stack direction="row" spacing={0.7} alignItems="center" sx={{ mt: 0.8 }}>
+      <Stack direction="row" spacing={0.7}  sx={{alignItems: "center",  mt: 0.8 }}>
         <Box
           sx={{
             px: 0.6,
@@ -193,18 +193,15 @@ export default function ReportsAnalytics() {
         >
           {/* Header */}
 
-          <Stack
+          <Stack sx={{ justifyContent: "space-between", alignItems: {
+              xs: "flex-start",
+              md: "center",
+            }, mb: 2.5 }}
             direction={{
               xs: "column",
               md: "row",
             }}
-            justifyContent="space-between"
-            alignItems={{
-              xs: "flex-start",
-              md: "center",
-            }}
             spacing={2}
-            mb={2.5}
           >
             <Box>
               <Typography
@@ -336,12 +333,11 @@ export default function ReportsAnalytics() {
               borderRadius: 2,
             }}
           >
-            <Stack
+            <Stack sx={{ justifyContent: "space-between" }}
               direction={{
                 xs: "column",
                 sm: "row",
               }}
-              justifyContent="space-between"
               spacing={1}
             >
               <Box>
@@ -384,9 +380,7 @@ export default function ReportsAnalytics() {
               {/* Y Axis */}
 
               <Stack
-                justifyContent="space-between"
-                alignItems="flex-end"
-                sx={{
+                sx={{justifyContent: "space-between", alignItems: "flex-end", 
                   width: 35,
                   pb: 3,
                   flexShrink: 0,
@@ -420,8 +414,7 @@ export default function ReportsAnalytics() {
                 {/* Grid */}
 
                 <Stack
-                  justifyContent="space-between"
-                  sx={{
+                  sx={{justifyContent: "space-between", 
                     position: "absolute",
                     inset: "0 0 28px",
                   }}
@@ -440,9 +433,7 @@ export default function ReportsAnalytics() {
 
                 <Stack
                   direction="row"
-                  justifyContent="space-around"
-                  alignItems="flex-end"
-                  sx={{
+                  sx={{justifyContent: "space-around", alignItems: "flex-end", 
                     position: "absolute",
                     inset: 0,
                     pb: 0,
@@ -451,18 +442,14 @@ export default function ReportsAnalytics() {
                   {data.map((item) => (
                     <Stack
                       key={item.day}
-                      alignItems="center"
-                      justifyContent="flex-end"
-                      sx={{
+                      sx={{alignItems: "center", justifyContent: "flex-end", 
                         height: "100%",
                         minWidth: 35,
                       }}
                     >
                       <Stack
                         direction="row"
-                        alignItems="flex-end"
-                        gap="2px"
-                        sx={{
+                        sx={{alignItems: "flex-end", gap: "2px", 
                           height: "calc(100% - 25px)",
                         }}
                       >
@@ -534,13 +521,11 @@ export default function ReportsAnalytics() {
                 Popular Categories
               </Typography>
 
-              <Stack spacing={1.8} mt={2.5}>
+              <Stack sx={{ mt: 2.5 }} spacing={1.8} >
                 {categories.map(([name, percentage, color]) => (
                   <Box key={name}>
-                    <Stack
+                    <Stack sx={{ justifyContent: "space-between", mb: 0.5 }}
                       direction="row"
-                      justifyContent="space-between"
-                      mb={0.5}
                     >
                       <Typography
                         sx={{
@@ -595,9 +580,7 @@ export default function ReportsAnalytics() {
             >
               <Stack
                 direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-                sx={{
+                sx={{justifyContent: "space-between", alignItems: "center", 
                   px: 2,
                   py: 1.5,
                   borderBottom: "1px solid #EDF0F5",
@@ -664,7 +647,7 @@ export default function ReportsAnalytics() {
                         borderTop: "1px solid #EDF0F5",
                       }}
                     >
-                      <Stack direction="row" alignItems="center" spacing={1}>
+                      <Stack sx={{ alignItems: "center" }} direction="row"  spacing={1}>
                         <Box
                           sx={{
                             width: 25,
@@ -739,7 +722,7 @@ export default function ReportsAnalytics() {
 
 function Legend({ color, text }) {
   return (
-    <Stack direction="row" spacing={0.5} alignItems="center">
+    <Stack sx={{ alignItems: "center" }} direction="row" spacing={0.5} >
       <Box
         sx={{
           width: 7,

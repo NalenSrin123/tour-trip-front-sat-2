@@ -117,9 +117,7 @@ export default function ReviewsManagement() {
 
       {/* =====================================
           HEADER
-          
           AdminHeader owns its own width.
-          
           DO NOT put AdminHeader inside
           another width/position wrapper.
       ===================================== */}
@@ -128,7 +126,6 @@ export default function ReviewsManagement() {
 
       {/* =====================================
           MAIN CONTENT
-          
           Only the page content accounts
           for sidebar and header.
       ===================================== */}
@@ -184,13 +181,11 @@ export default function ReviewsManagement() {
               xs: "column",
               md: "row",
             }}
-            justifyContent="space-between"
-            alignItems={{
+            spacing={2}
+            sx={{justifyContent: "space-between", alignItems: {
               xs: "stretch",
               md: "center",
-            }}
-            spacing={2}
-            sx={{
+            }, 
               width: "100%",
               mb: 2.5,
             }}
@@ -371,11 +366,10 @@ export default function ReviewsManagement() {
                 md: "row",
               }}
               spacing={1.5}
-              alignItems={{
+              sx={{alignItems: {
                 xs: "stretch",
                 md: "flex-end",
-              }}
-              sx={{
+              }, 
                 width: "100%",
               }}
             >
@@ -673,10 +667,9 @@ export default function ReviewsManagement() {
                           px: 1.5,
                         }}
                       >
-                        <Stack
+                        <Stack sx={{ alignItems: "center" }}
                           direction="row"
                           spacing={1}
-                          alignItems="center"
                         >
                           <Box
                             sx={{
@@ -884,13 +877,11 @@ export default function ReviewsManagement() {
                 xs: "column",
                 sm: "row",
               }}
-              justifyContent="space-between"
-              alignItems={{
+              spacing={1}
+              sx={{justifyContent: "space-between", alignItems: {
                 xs: "flex-start",
                 sm: "center",
-              }}
-              spacing={1}
-              sx={{
+              }, 
                 width: "100%",
 
                 boxSizing: "border-box",
