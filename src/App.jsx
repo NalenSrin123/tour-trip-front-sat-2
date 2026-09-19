@@ -45,7 +45,8 @@ function App() {
         }
       />
       <Route path="/destinations/create" element={<CreateDestination />} />
-      <Route path="/guides" element={<CreateListGuide title="Guides" />} />
+      <Route path="/guides" element={<ListGuides />} />
+      <Route path='/guides/create' element={< CreateListGuide/>} />
       <Route path="/schedules" element={<ListSchedule />} />
       <Route path="/schedules/create" element={<ScheduleFormPage />} />
       <Route path="/bookings" element={<Bookings />} />
