@@ -29,7 +29,7 @@ import Setting from './pages/admin/settings/Setting';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<CustomerReview title="Dashboard" />} />
+      <Route path="/" element={<PlaceholderPage title="Dashboard" />} />
       <Route path="/tours" element={<List_tour title="Tours" />} />
       <Route path="/categories" element={<PlaceholderPage title="Categories" />} />
       <Route
