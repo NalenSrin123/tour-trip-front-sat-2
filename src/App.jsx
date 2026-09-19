@@ -23,8 +23,7 @@ import TourDetailTop from './components/tour/TourDetailTop'
 import CustomerReview from './pages/public/CustomerReview';
 import ListCategory from "./pages/admin/categories/listcategory"
 import ListGuides from './pages/admin/guides/ListGuides';
-import ListSchedule from './pages/admin/schedules/ListSchedule'
-import ScheduleFormPage from './pages/admin/schedules/ScheduleFormPage'
+import ListSchedule from './pages/admin/schedules/Listschedule'
 import Setting from './pages/admin/settings/Setting';
 import AddBooking from './pages/admin/bookings/AddBooking';
 
