@@ -1,15 +1,29 @@
 import { useEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import AdminSidebar from '../../../components/layout/AdminSidebar'
 import AdminHeader from '../../../components/layout/AdminHeader'
+import { createDestination, getDestination, updateDestination } from '../../../services/destinationsService'
+import { compressImage } from '../../../utils/compressImage'
 
 const DESCRIPTION_MAX_LENGTH = 500
 const MAX_GALLERY_IMAGES = 10
 const NAME_MAX_LENGTH = 100 // matches the VARCHAR(100) UNIQUE column on destinations.name
 
+// This component handles BOTH creating a new destination and editing an
+// existing one — routed as /destinations/create (no :id) and
+// /destinations/edit/:id respectively. Image state (featuredImage and each
+// gallery image) carries an `isNew` flag: true means it's a freshly-picked
+// File with a local blob preview that needs converting to a data URL on
+// save; false means it's an already-saved image (loaded in as its existing
+// data URL when editing) that should be kept as-is unless replaced/removed.
 export default function CreateDestination({ onCancel, onSubmit }) {
   const navigate = useNavigate()
+  const { id } = useParams()
+  const isEditMode = Boolean(id)
+
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [isLoadingExisting, setIsLoadingExisting] = useState(isEditMode)
+  const [notFound, setNotFound] = useState(false)
 
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
@@ -22,17 +36,71 @@ export default function CreateDestination({ onCancel, onSubmit }) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [descriptionLength, setDescriptionLength] = useState(0)
   const [successMessage, setSuccessMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   const featuredInputRef = useRef(null)
   const galleryInputRef = useRef(null)
   const descriptionRef = useRef(null)
 
-  // Object URLs are only for local preview; revoke them on unmount so we don't
-  // leak memory if someone leaves this page open with several images staged.
+  // Load the existing destination when editing. Runs once on mount.
+  useEffect(() => {
+    if (!isEditMode) return
+    let isMounted = true
+    async function loadExisting() {
+      const existing = await getDestination(id)
+      if (!isMounted) return
+      if (!existing) {
+        setNotFound(true)
+        setIsLoadingExisting(false)
+        return
+      }
+      setName(existing.name ?? '')
+      setStatus(existing.status ?? 'active')
+      setDescription(existing.description ?? '')
+      if (existing.featuredImageUrl) {
+        setFeaturedImage({ file: null, url: existing.featuredImageUrl, isNew: false })
+      }
+      if (existing.galleryImageUrls?.length) {
+        setGalleryImages(
+          existing.galleryImageUrls.map((url, index) => ({
+            id: `existing-${index}`,
+            file: null,
+            url,
+            isNew: false,
+          }))
+        )
+      }
+      setIsLoadingExisting(false)
+    }
+    loadExisting()
+    return () => {
+      isMounted = false
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // The description editor is uncontrolled (see syncDescriptionFromEditor) —
+  // its DOM node doesn't exist yet while the "Loading destination…" screen is
+  // showing, so we can't set its innerHTML from inside loadExisting() above.
+  // This runs once loading finishes and the real form (with the ref) has
+  // actually mounted, and pushes the loaded description into it at that point.
+  useEffect(() => {
+    if (isEditMode && !isLoadingExisting && descriptionRef.current) {
+      descriptionRef.current.innerHTML = description
+      setDescriptionLength(descriptionRef.current.textContent.length)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoadingExisting])
+
+  // Object URLs are only for local preview of NEWLY picked files; revoke
+  // them on unmount so we don't leak memory. Existing (already-saved) image
+  // URLs are plain data URLs, not blob URLs, so they don't need revoking.
   useEffect(() => {
     return () => {
-      if (featuredImage) URL.revokeObjectURL(featuredImage.url)
-      galleryImages.forEach((image) => URL.revokeObjectURL(image.url))
+      if (featuredImage?.isNew) URL.revokeObjectURL(featuredImage.url)
+      galleryImages.forEach((image) => {
+        if (image.isNew) URL.revokeObjectURL(image.url)
+      })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -40,11 +108,9 @@ export default function CreateDestination({ onCancel, onSubmit }) {
   function handleFeaturedImageChange(event) {
     const file = event.target.files?.[0]
     if (!file) return
-
-    // Revoke the previous preview URL before replacing it.
     setFeaturedImage((current) => {
-      if (current) URL.revokeObjectURL(current.url)
-      return { file, url: URL.createObjectURL(file) }
+      if (current?.isNew) URL.revokeObjectURL(current.url)
+      return { file, url: URL.createObjectURL(file), isNew: true }
     })
     setErrors((current) => ({ ...current, featuredImage: undefined }))
     event.target.value = ''
@@ -52,7 +118,7 @@ export default function CreateDestination({ onCancel, onSubmit }) {
 
   function removeFeaturedImage() {
     setFeaturedImage((current) => {
-      if (current) URL.revokeObjectURL(current.url)
+      if (current?.isNew) URL.revokeObjectURL(current.url)
       return null
     })
   }
@@ -60,7 +126,6 @@ export default function CreateDestination({ onCancel, onSubmit }) {
   function handleGalleryImagesChange(event) {
     const files = Array.from(event.target.files ?? [])
     if (files.length === 0) return
-
     setGalleryImages((current) => {
       const remainingSlots = MAX_GALLERY_IMAGES - current.length
       const nextFiles = files.slice(0, remainingSlots)
@@ -68,27 +133,21 @@ export default function CreateDestination({ onCancel, onSubmit }) {
         id: `${file.name}-${file.lastModified}-${Math.random()}`,
         file,
         url: URL.createObjectURL(file),
+        isNew: true,
       }))
       return [...current, ...nextImages]
     })
-
     event.target.value = ''
   }
 
-  function removeGalleryImage(id) {
+  function removeGalleryImage(imgId) {
     setGalleryImages((current) => {
-      const target = current.find((image) => image.id === id)
-      if (target) URL.revokeObjectURL(target.url)
-      return current.filter((image) => image.id !== id)
+      const target = current.find((image) => image.id === imgId)
+      if (target?.isNew) URL.revokeObjectURL(target.url)
+      return current.filter((image) => image.id !== imgId)
     })
   }
 
-  // The description editor is a contentEditable div formatted via the
-  // browser's built-in editing commands (document.execCommand). It's marked
-  // deprecated in the spec but still fully supported in every major browser,
-  // and it's what a lot of lightweight WYSIWYG toolbars use under the hood.
-  // If richer needs come up later (undo history, structured JSON output,
-  // custom paste rules), that's the point to move to a library like Tiptap.
   function syncDescriptionFromEditor() {
     const node = descriptionRef.current
     if (!node) return
@@ -110,9 +169,6 @@ export default function CreateDestination({ onCancel, onSubmit }) {
     event.preventDefault()
     const node = descriptionRef.current
     if (!node) return
-
-    // Paste as plain text only — avoids pulling in arbitrary formatting/markup
-    // from other sites, and keeps the character limit easy to enforce.
     const currentLength = node.textContent.length
     const remaining = Math.max(0, DESCRIPTION_MAX_LENGTH - currentLength)
     const text = event.clipboardData.getData('text/plain').slice(0, remaining)
@@ -144,13 +200,11 @@ export default function CreateDestination({ onCancel, onSubmit }) {
   function validate() {
     const nextErrors = {}
     const trimmedName = name.trim()
-
     if (!trimmedName) {
       nextErrors.name = 'Destination name is required.'
     } else if (trimmedName.length > NAME_MAX_LENGTH) {
       nextErrors.name = `Destination name must be ${NAME_MAX_LENGTH} characters or fewer.`
     }
-
     setErrors(nextErrors)
     return Object.keys(nextErrors).length === 0
   }
@@ -160,50 +214,70 @@ export default function CreateDestination({ onCancel, onSubmit }) {
       name: name.trim(),
       description,
       status: destinationStatus,
-      featuredImage: featuredImage?.file ?? null,
-      galleryImages: galleryImages.map((image) => image.file),
+      featuredImage,
+      galleryImages,
     }
   }
 
-  async function handlePublish() {
-  if (!validate()) return
+  // Converts any NEW File-backed images to data URLs; keeps already-saved
+  // (isNew: false) image URLs exactly as they are.
+  async function toStorableDestination(payload) {
+    const featuredImageUrl = payload.featuredImage
+      ? payload.featuredImage.isNew
+        ? await compressImage(payload.featuredImage.file)
+        : payload.featuredImage.url
+      : null
 
-  setIsSubmitting(true)
-  try {
-    // TODO: wire up to src/services once the create-destination API endpoint exists.
-    const payload = buildPayload(status)
-    if (onSubmit) {
-      await onSubmit(payload)
-    } else {
-      console.log('Publish destination', payload)
-      setSuccessMessage(`"${payload.name}" was published. (No API yet — this is a mock; full payload logged to the console.)`)
+    const galleryImageUrls = await Promise.all(
+      payload.galleryImages.map((image) => (image.isNew ? compressImage(image.file) : image.url))
+    )
+
+    return {
+      name: payload.name,
+      description: payload.description,
+      status: payload.status,
+      featuredImageUrl,
+      galleryImageUrls,
+    }
+  }
+
+  async function saveDestination(destinationStatus, successText) {
+    if (!validate()) return
+
+    setIsSubmitting(true)
+    setErrorMessage(null)
+    try {
+      const payload = buildPayload(destinationStatus)
+      if (onSubmit) {
+        await onSubmit(payload)
+        return
+      }
+      const stored = await toStorableDestination(payload)
+      if (isEditMode) {
+        await updateDestination(id, stored)
+      } else {
+        await createDestination(stored)
+      }
+      setSuccessMessage(successText)
       window.scrollTo({ top: 0, behavior: 'smooth' })
       setTimeout(() => navigate('/destinations'), 1200)
-    }
-  } finally {
-    setIsSubmitting(false)
-  }
-}
-
-async function handleSaveDraft() {
-  if (!validate()) return
-
-  setIsSubmitting(true)
-  try {
-    // TODO: wire up to src/services once the create-destination API endpoint exists.
-    const payload = buildPayload('inactive')
-    if (onSubmit) {
-      await onSubmit(payload)
-    } else {
-      console.log('Save destination as draft', payload)
-      setSuccessMessage(`"${payload.name}" was saved as a draft. (No API yet — this is a mock; full payload logged to the console.)`)
+    } catch (error) {
+      setErrorMessage(error.message)
       window.scrollTo({ top: 0, behavior: 'smooth' })
-      setTimeout(() => navigate('/destinations'), 1200)
+    } finally {
+      setIsSubmitting(false)
     }
-  } finally {
-    setIsSubmitting(false)
   }
-}
+
+  function handlePublish() {
+    const name_ = name.trim()
+    saveDestination(status, isEditMode ? `"${name_}" was updated.` : `"${name_}" was published.`)
+  }
+
+  function handleSaveDraft() {
+    const name_ = name.trim()
+    saveDestination('inactive', isEditMode ? `"${name_}" was updated and saved as a draft.` : `"${name_}" was saved as a draft.`)
+  }
 
   function handleCancel() {
     if (onCancel) {
@@ -213,13 +287,39 @@ async function handleSaveDraft() {
     }
   }
 
+  if (isEditMode && isLoadingExisting) {
+    return (
+      <div className="bg-background text-on-background min-h-screen">
+        <AdminSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+        <AdminHeader onMenuClick={() => setSidebarOpen(true)} />
+        <main className="md:ml-sidebar-width p-4 md:p-lg">
+          <p className="text-body-lg text-on-surface-variant">Loading destination…</p>
+        </main>
+      </div>
+    )
+  }
+
+  if (isEditMode && notFound) {
+    return (
+      <div className="bg-background text-on-background min-h-screen">
+        <AdminSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+        <AdminHeader onMenuClick={() => setSidebarOpen(true)} />
+        <main className="md:ml-sidebar-width p-4 md:p-lg">
+          <p className="text-body-lg text-error">
+            That destination couldn't be found — it may have been deleted.
+          </p>
+        </main>
+      </div>
+    )
+  }
+
   return (
-    <div className="min-h-screen bg-background text-on-background">
+    <div className="bg-background text-on-background min-h-screen">
       <AdminSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <AdminHeader onMenuClick={() => setSidebarOpen(true)} />
 
-      <main className="md:ml-sidebar-width min-h-[calc(100vh-4rem)] p-4 md:p-lg">
-        <div className="w-full">
+      <main className="md:ml-sidebar-width p-4 md:p-lg">
+        <div className="max-w-[1200px] mx-auto">
           {successMessage && (
             <div
               role="status"
@@ -229,12 +329,22 @@ async function handleSaveDraft() {
               {successMessage}
             </div>
           )}
-          {/* Page Header */}
+          {errorMessage && (
+            <div
+              role="alert"
+              className="mb-6 md:mb-lg px-4 py-3 rounded-lg bg-error-container text-on-error-container text-body-md flex items-center gap-2"
+            >
+              <span className="material-symbols-outlined text-[20px]">error</span>
+              {errorMessage}
+            </div>
+          )}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 md:mb-lg gap-4 relative">
             <div>
-              <h2 className="text-headline-xl text-on-surface">Create Destination</h2>
+              <h2 className="text-headline-xl text-on-surface">
+                {isEditMode ? 'Edit Destination' : 'Create Destination'}
+              </h2>
               <p className="text-body-lg text-on-surface-variant mt-1">
-                Add a new location to your tour catalog.
+                {isEditMode ? "Update this location's details." : 'Add a new location to your tour catalog.'}
               </p>
             </div>
             <div className="flex gap-3 w-full sm:w-auto">
@@ -252,17 +362,16 @@ async function handleSaveDraft() {
                 disabled={isSubmitting}
                 className="flex-1 sm:flex-none px-4 py-2 rounded-lg bg-primary text-on-primary text-label-lg hover:bg-primary-container transition-colors flex items-center justify-center gap-2 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <span className="material-symbols-outlined text-sm">publish</span>
-                {isSubmitting ? 'Publishing…' : 'Publish Destination'}
+                <span className="material-symbols-outlined text-sm">
+                  {isEditMode ? 'save' : 'publish'}
+                </span>
+                {isSubmitting ? 'Saving…' : isEditMode ? 'Save Changes' : 'Publish Destination'}
               </button>
             </div>
           </div>
 
-          {/* Main Form Layout */}
-          <div className="grid grid-cols-1 gap-6 md:gap-lg lg:grid-cols-[minmax(0,2fr)_minmax(360px,1fr)]">
-            {/* Left Column: Primary Information */}
-            <div className="space-y-6 md:space-y-lg">
-              {/* Basic Information Card */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-lg">
+            <div className="lg:col-span-2 space-y-6 md:space-y-lg">
               <section className="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm p-4 md:p-lg">
                 <h3 className="text-headline-md text-on-surface mb-4 flex items-center gap-2">
                   <span className="material-symbols-outlined text-primary">info</span>
@@ -298,7 +407,6 @@ async function handleSaveDraft() {
                 </div>
               </section>
 
-              {/* Description Card */}
               <section className="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm p-4 md:p-lg">
                 <h3 className="text-headline-md text-on-surface mb-4 flex items-center gap-2">
                   <span className="material-symbols-outlined text-primary">description</span>
@@ -309,69 +417,27 @@ async function handleSaveDraft() {
                     Detailed Description
                   </label>
                   <div className="px-2 md:px-md py-2 border-b border-outline-variant/50 flex flex-wrap items-center gap-1 md:gap-2 bg-surface-container-lowest mb-2">
-                    <button
-                      type="button"
-                      onMouseDown={(event) => event.preventDefault()}
-                      onClick={() => applyFormat('bold')}
-                      aria-label="Bold"
-                      className="p-1 rounded hover:bg-surface-container text-on-surface-variant transition-colors"
-                    >
+                    <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => applyFormat('bold')} aria-label="Bold" className="p-1 rounded hover:bg-surface-container text-on-surface-variant transition-colors">
                       <span className="material-symbols-outlined text-[20px]">format_bold</span>
                     </button>
-                    <button
-                      type="button"
-                      onMouseDown={(event) => event.preventDefault()}
-                      onClick={() => applyFormat('italic')}
-                      aria-label="Italic"
-                      className="p-1 rounded hover:bg-surface-container text-on-surface-variant transition-colors"
-                    >
+                    <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => applyFormat('italic')} aria-label="Italic" className="p-1 rounded hover:bg-surface-container text-on-surface-variant transition-colors">
                       <span className="material-symbols-outlined text-[20px]">format_italic</span>
                     </button>
-                    <button
-                      type="button"
-                      onMouseDown={(event) => event.preventDefault()}
-                      onClick={() => applyFormat('underline')}
-                      aria-label="Underline"
-                      className="p-1 rounded hover:bg-surface-container text-on-surface-variant transition-colors"
-                    >
+                    <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => applyFormat('underline')} aria-label="Underline" className="p-1 rounded hover:bg-surface-container text-on-surface-variant transition-colors">
                       <span className="material-symbols-outlined text-[20px]">format_underlined</span>
                     </button>
                     <div className="hidden sm:block w-px h-4 bg-outline-variant mx-1" />
-                    <button
-                      type="button"
-                      onMouseDown={(event) => event.preventDefault()}
-                      onClick={() => applyFormat('insertUnorderedList')}
-                      aria-label="Bulleted list"
-                      className="p-1 rounded hover:bg-surface-container text-on-surface-variant transition-colors"
-                    >
+                    <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => applyFormat('insertUnorderedList')} aria-label="Bulleted list" className="p-1 rounded hover:bg-surface-container text-on-surface-variant transition-colors">
                       <span className="material-symbols-outlined text-[20px]">format_list_bulleted</span>
                     </button>
-                    <button
-                      type="button"
-                      onMouseDown={(event) => event.preventDefault()}
-                      onClick={() => applyFormat('insertOrderedList')}
-                      aria-label="Numbered list"
-                      className="p-1 rounded hover:bg-surface-container text-on-surface-variant transition-colors"
-                    >
+                    <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => applyFormat('insertOrderedList')} aria-label="Numbered list" className="p-1 rounded hover:bg-surface-container text-on-surface-variant transition-colors">
                       <span className="material-symbols-outlined text-[20px]">format_list_numbered</span>
                     </button>
                     <div className="hidden sm:block w-px h-4 bg-outline-variant mx-1" />
-                    <button
-                      type="button"
-                      onMouseDown={(event) => event.preventDefault()}
-                      onClick={handleDescriptionLink}
-                      aria-label="Insert link"
-                      className="p-1 rounded hover:bg-surface-container text-on-surface-variant transition-colors"
-                    >
+                    <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={handleDescriptionLink} aria-label="Insert link" className="p-1 rounded hover:bg-surface-container text-on-surface-variant transition-colors">
                       <span className="material-symbols-outlined text-[20px]">link</span>
                     </button>
-                    <button
-                      type="button"
-                      onMouseDown={(event) => event.preventDefault()}
-                      onClick={handleDescriptionImage}
-                      aria-label="Insert image"
-                      className="p-1 rounded hover:bg-surface-container text-on-surface-variant transition-colors"
-                    >
+                    <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={handleDescriptionImage} aria-label="Insert image" className="p-1 rounded hover:bg-surface-container text-on-surface-variant transition-colors">
                       <span className="material-symbols-outlined text-[20px]">image</span>
                     </button>
                   </div>
@@ -396,9 +462,7 @@ async function handleSaveDraft() {
               </section>
             </div>
 
-            {/* Right Column: Media and Settings */}
-            <div className="space-y-6 md:space-y-lg lg:sticky lg:top-24 self-start">
-              {/* Media Card */}
+            <div className="space-y-6 md:space-y-lg">
               <section className="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm p-4 md:p-lg">
                 <h3 className="text-headline-md text-on-surface mb-4 flex items-center gap-2">
                   <span className="material-symbols-outlined text-primary">image</span>
@@ -415,11 +479,7 @@ async function handleSaveDraft() {
                   >
                     {featuredImage ? (
                       <>
-                        <img
-                          src={featuredImage.url}
-                          alt="Featured destination preview"
-                          className="absolute inset-0 w-full h-full object-cover"
-                        />
+                        <img src={featuredImage.url} alt="Featured destination preview" className="absolute inset-0 w-full h-full object-cover" />
                         <button
                           type="button"
                           onClick={(event) => {
@@ -449,9 +509,7 @@ async function handleSaveDraft() {
                       type="file"
                       accept="image/*"
                       onChange={handleFeaturedImageChange}
-                      className={`absolute inset-0 w-full h-full opacity-0 z-20 ${
-                        featuredImage ? 'pointer-events-none' : 'cursor-pointer'
-                      }`}
+                      className={`absolute inset-0 w-full h-full opacity-0 z-20 ${featuredImage ? 'pointer-events-none' : 'cursor-pointer'}`}
                     />
                   </div>
 
@@ -471,7 +529,6 @@ async function handleSaveDraft() {
                           </button>
                         </div>
                       ))}
-
                       {galleryImages.length < MAX_GALLERY_IMAGES && (
                         <button
                           type="button"
@@ -498,7 +555,6 @@ async function handleSaveDraft() {
                 </div>
               </section>
 
-              {/* Settings Card */}
               <section className="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm p-4 md:p-lg">
                 <h3 className="text-headline-md text-on-surface mb-4 flex items-center gap-2">
                   <span className="material-symbols-outlined text-primary">settings</span>

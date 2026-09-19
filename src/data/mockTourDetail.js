@@ -29,7 +29,7 @@ export const MOCK_TOUR = {
     "Embark on an unforgettable journey into the heart of the ancient Khmer Empire. This meticulously crafted 3-day adventure brings you face-to-face with the legendary temples of Siem Reap, Cambodia. Witness a majestic sunrise over Angkor Wat, walk under the enigmatic giant stone faces of Bayon Temple, and explore Ta Prohm — uniquely reclaimed by massive jungle tree roots. Beyond the temples, discover local life at a floating village on Tonle Sap Lake and enjoy Cambodia's warm hospitality, rich local culinary traditions, and vibrant cultural heritage.",
   pricePerPerson: 150,
   // TODO(media feature owner): replace with real uploaded photo URLs once
-  // available (see fileToDataUrl.js / the admin CreateDestination pattern
+  // available (see compressImage.js / the admin CreateDestination pattern
   // for how images get turned into storable URLs).
   photos: [
     { id: 'photo-1', url: photo1, alt: 'Angkor Wat at sunrise, reflected in the moat' },

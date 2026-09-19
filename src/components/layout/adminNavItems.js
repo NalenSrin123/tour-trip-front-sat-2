@@ -1,5 +1,5 @@
 export const NAV_ITEMS = [
-  { icon: 'dashboard', label: 'Dashboard', path: '/' },
+  { icon: 'dashboard', label: 'Dashboard', path: '/admin' },
   { icon: 'map', label: 'Tours', path: '/tours' },
   { icon: 'category', label: 'Categories', path: '/categories' },
   { icon: 'location_on', label: 'Destinations', path: '/destinations' },

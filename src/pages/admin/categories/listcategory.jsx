@@ -58,7 +58,7 @@ export default function ManageCustomers() {
     <div className="min-h-screen w-full bg-[#eef0f7]">
       <header className="h-16 border-b border-slate-200 bg-white px-5">
         <div className="flex h-full items-center justify-between">
-          <div className="relative w-full max-w-sm">
+          <div className="relative w-full max-w-[24rem]">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <input
               type="text"

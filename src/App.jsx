@@ -18,7 +18,7 @@ import PublicFooter from './components/layout/PublicFooter'
 import ManageCustomers from './pages/admin/customers/ManageCustomers';
 import ListPayment from './components/payment/ListPayment';
 import PageReport from './pages/admin/reports/PageReport';
-import DegsignSectionExpolore from './pages/public/DesignSectionExplore'
+import DesignSectionExplore from './pages/public/DesignSectionExplore'
 import TourDetailTop from './components/tour/TourDetailTop'
 import CustomerReview from './pages/public/CustomerReview';
 import ListCategory from "./pages/admin/categories/listcategory"
@@ -26,26 +26,32 @@ import ListGuides from './pages/admin/guides/ListGuides';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<CustomerReview title="Dashboard" />} />
+      <Route
+  path="/"
+  element={
+    <>
+      <PromoBanner
+        message="Summer Sale: Save 20% on all Cambodia tours."
+        ctaLabel="Explore Tours"
+        ctaHref="/tours"
+      />
+      <PublicHeader />
+      <main style={{ minHeight: '60vh' }} />
+      <PublicFooter />
+    </>
+  }
+/>
+      <Route path="/admin" element={<PlaceholderPage title="Dashboard" />} />
       <Route path="/tours" element={<List_tour title="Tours" />} />
       <Route path="/categories" element={<PlaceholderPage title="Categories" />} />
-      <Route
-        path="/destinations"
-        element={
-          <ManageDestinations
-            title="Destinations"
-            description="The destinations list page hasn't been built yet — for now, head to Create Destination directly."
-            actionTo="/destinations/create"
-            actionLabel="Create Destination"
-          />
-        }
-      />
+      <Route path="/destinations" element={<ManageDestinations />} />
       <Route path="/destinations/create" element={<CreateDestination />} />
+      <Route path="/destinations/edit/:id" element={<CreateDestination />} />
       <Route path="/guides" element={<ListGuides title="Guides" />} />
       <Route path="/schedules" element={<ScheduleFormPage />} />
       <Route path="/bookings" element={<Bookings />} />
       <Route path="/customers" element={<ManageCustomers/>} />
-      <Route path="/reviews" element={<PlaceholderPage title="Reviews" />} />
+      <Route path="/reviews" element={<CustomerReview />} />
       <Route path="/reports" element={< PageReport/>} />
       <Route path="/payments" element={<ListPayment/>}/>
       <Route path="/settings" element={<PlaceholderPage title="Settings" />} />
@@ -56,7 +62,7 @@ function App() {
       <Route path="/admin/add-new-tour" element={<AddNewTour />} />
       <Route path="/confirm-otp" element={<ConfirmOTP />} />
       <Route path="/create-user" element={<CreateUser />} />
-      <Route path="/design-section-explore" element={ <DegsignSectionExpolore /> } />
+      <Route path="/design-section-explore" element={ <DesignSectionExplore /> } />
       <Route path="/list-category" element={<ListCategory />} />
       <Route
         path="/preview"
@@ -84,6 +90,7 @@ function App() {
   }
 />
     </Routes>
+    
   )
 }
 

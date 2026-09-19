@@ -59,7 +59,7 @@ export default function ConfirmOTP({ email = "you@example.com" }) {
 
       {/* Right side — OTP form panel */}
       <div className="md:w-1/2 flex items-center justify-center px-8 py-16 bg-white">
-        <div className="w-full max-w-sm text-center">
+        <div className="w-full max-w-[24rem] text-center">
           {/* Illustration placeholder — swap with your own image */}
           <div className="w-40 h-32 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
           <img //logo
