@@ -149,7 +149,7 @@ export default function ReviewsManagement() {
 
           overflowX: "hidden",
 
-          pt: `${HEADER_HEIGHT}px`,
+          pt: "0px",
         }}
       >
         {/* =================================
