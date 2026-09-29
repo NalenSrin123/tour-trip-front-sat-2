@@ -14,6 +14,7 @@ import Bookings from './pages/admin/bookings/Bookings';
 import PromoBanner from './components/layout/PromoBanner'
 import PublicHeader from './components/layout/PublicHeader'
 import PublicFooter from './components/layout/PublicFooter'
+import Home from "./pages/public/Home";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
       <Route path="/admin/add-new-tour" element={<AddNewTour />} />
       <Route path="/confirm-otp" element={<ConfirmOTP />} />
       <Route path="/create-user" element={<CreateUser />} />
+      <Route path="/home" element={<Home />} />
       <Route
         path="/preview"
         element={
