@@ -7,13 +7,13 @@ import AddNewTour from "./pages/admin/bookings/AddNewTour";
 import ConfirmOTP from "./pages/public/ConfirmOTP";
 //
 //
-// import IncludeMetting from "./pages/public/include_and_metting";
+import IncludeMetting from "./pages/public/include_and_metting";
 
 function App() {
   return (
     <Routes>
-      {/* <Route path="/" element={<IncludeMetting />} /> */}
-      <Route path="/tours" element={<PlaceholderPage title="Tours" />} />
+      <Route path="/" element={<IncludeMetting />} />
+      {/* <Route path="/tours" element={<PlaceholderPage title="Tours" />} />
       <Route
         path="/categories"
         element={<PlaceholderPage title="Categories" />}
@@ -49,7 +49,7 @@ function App() {
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/admin/add-new-tour" element={<AddNewTour />} />
-      <Route path="/confirm-otp" element={<ConfirmOTP />} />
+      <Route path="/confirm-otp" element={<ConfirmOTP />} /> */}
     </Routes>
   );
 }
