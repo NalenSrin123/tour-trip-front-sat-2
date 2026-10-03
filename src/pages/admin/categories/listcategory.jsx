@@ -1,234 +1,141 @@
-import React from "react";
-import {
-  Download,
-  Plus,
-  Search,
-  ChevronDown,
-  SlidersHorizontal,
-  ChevronLeft,
-  ChevronRight,
-  MoreHorizontal,
-  Bell,
-  Mail,
-} from "lucide-react";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Plus, Filter, Building2, Compass, Leaf, MapPinned, Mountain } from 'lucide-react';
+import AdminSidebar from '../../../components/layout/AdminSidebar';
+import AdminHeader from '../../../components/layout/AdminHeader';
 
-const customers = [
+const categories = [
   {
-    id: "CUST-001",
-    initials: "ER",
-    avatarBg: "bg-slate-200",
-    avatarText: "text-slate-500",
-    photo: true,
-    name: "Eleanor Richards",
+    name: 'Adventure',
+    description: 'High-energy outdoor experiences and extreme sports.',
+    tours: 124,
+    active: true,
+    icon: Mountain,
+    iconBg: 'bg-[#edf5ff] text-[#2f6fe8]',
   },
   {
-    id: "CUST-002",
-    initials: "MW",
-    avatarBg: "bg-violet-100",
-    avatarText: "text-violet-600",
-    photo: false,
-    name: "Marcus Webb",
+    name: 'Cultural',
+    description: 'Historical sites, museums, and local heritage.',
+    tours: 89,
+    active: true,
+    icon: Building2,
+    iconBg: 'bg-[#eef5f9] text-[#2a7e91]',
   },
   {
-    id: "CUST-003",
-    initials: "SC",
-    avatarBg: "bg-slate-200",
-    avatarText: "text-slate-500",
-    photo: true,
-    name: "Sophia Chen",
+    name: 'Beach & Island',
+    description: 'Relaxing coastal getaways and water activities.',
+    tours: 56,
+    active: true,
+    icon: MapPinned,
+    iconBg: 'bg-[#edf9f7] text-[#1d7a6d]',
+  },
+  {
+    name: 'City Tours',
+    description: 'Urban exploration, sightseeing, and nightlife.',
+    tours: 210,
+    active: true,
+    icon: Compass,
+    iconBg: 'bg-[#f3f0ff] text-[#7254d6]',
+  },
+  {
+    name: 'Nature & Wildlife',
+    description: 'Safaris, national parks, and eco-tours.',
+    tours: 0,
+    active: false,
+    icon: Leaf,
+    iconBg: 'bg-[#eef9f1] text-[#4a8a5d]',
   },
 ];
 
-function Avatar({ customer }) {
+export default function ManageCategory() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
-    <div
-      className={`flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full text-xs font-semibold ${customer.avatarBg} ${customer.avatarText}`}
-    >
-      {customer.photo ? (
-        <div className="h-full w-full bg-gradient-to-br from-slate-300 to-slate-400" />
-      ) : (
-        customer.initials
-      )}
-    </div>
-  );
-}
+    <div className="bg-[#f4f6fb] min-h-screen text-slate-800">
+      <AdminSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <AdminHeader onMenuClick={() => setSidebarOpen(true)} />
 
-export default function ManageCustomers() {
-  return (
-    <div className="min-h-screen w-full bg-[#eef0f7]">
-      <header className="h-16 border-b border-slate-200 bg-white px-5">
-        <div className="flex h-full items-center justify-between">
-          <div className="relative w-full max-w-sm">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-            <input
-              type="text"
-              placeholder="Search..."
-              className="h-10 w-full rounded-lg border border-slate-200 bg-white pl-9 pr-3 text-sm text-slate-700 outline-none placeholder:text-slate-400 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
-            />
-          </div>
-
-          <div className="ml-6 flex h-full items-center">
-            <button className="relative flex h-10 w-10 items-center justify-center text-slate-500 hover:text-slate-700">
-              <Bell className="h-5 w-5" />
-            </button>
-
-            <button className="flex h-10 w-10 items-center justify-center text-slate-500 hover:text-slate-700">
-              <Mail className="h-5 w-5" />
-            </button>
-
-            <div className="mx-3 h-8 w-px bg-slate-200" />
-
-            <button className="flex items-center gap-2 rounded-lg px-2 py-1.5 hover:bg-slate-50">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-slate-100">
-                <span className="text-xs font-semibold text-slate-600">
-                  A
-                </span>
+      <main className="md:ml-sidebar-width p-4 md:p-6 lg:p-8">
+        <div className="min-h-screen px-4 py-6 sm:px-8 lg:px-10">
+          <div className="mx-auto max-w-[1200px]">
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <div>
+                <h2 className="m-0 text-[28px] font-bold text-[#0f172a]">
+                  Manage Categories
+                </h2>
+                <p className="mt-1 text-[14px] text-slate-500">
+                  Organize and configure your tour offerings.
+                </p>
               </div>
 
-              <span className="text-sm font-medium text-slate-700">
-                Admin Profile
-              </span>
-
-              <ChevronDown className="h-4 w-4 text-slate-500" />
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <div className="w-full p-6 sm:p-10">
-        <div className="mx-auto max-w-6xl">
-          {/* Header */}
-          <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-            <div>
-              <h1 className="text-2xl font-bold text-slate-900">
-                Manage Category
-              </h1>
-              <p className="mt-1 text-sm text-slate-500">
-                View and manage categories and their details.
-              </p>
+              <Link
+                to="/categories/create"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#2563eb] px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#1d4ed8]"
+              >
+                <Plus size={16} />
+                Add Category
+              </Link>
             </div>
 
-            <div className="flex items-center gap-3">
-              <button className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50">
-                <Download className="h-4 w-4" />
-                Export
+            <div className="mb-6 flex items-center gap-3 text-slate-600">
+              <button
+                type="button"
+                className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm"
+              >
+                <Filter size={16} />
+                Filter
               </button>
-
-
-              <button className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-indigo-700">
-                <Plus className="h-4 w-4" />
-                Add Customer
-              </button>
-            </div>
-          </div>
-
-          {/* Filters */}
-          <div className="mb-4 flex flex-col gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:flex-row sm:items-center">
-            <div className="relative flex-1">
-              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-
-              <input
-                type="text"
-                placeholder="Search customers by name, email or phone..."
-                className="w-full rounded-lg border border-slate-200 bg-white py-2.5 pl-9 pr-3 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
-              />
-            </div>
-
-            <button className="inline-flex items-center justify-between gap-6 rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-600 sm:w-40">
-              All Statuses
-              <ChevronDown className="h-4 w-4 text-slate-400" />
-            </button>
-
-            <button className="inline-flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50">
-              <SlidersHorizontal className="h-4 w-4" />
-              More Filters
-            </button>
-          </div>
-
-          {/* Table */}
-          <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[420px] text-left">
-                <thead>
-                  <tr className="border-b border-slate-100 text-xs font-semibold uppercase tracking-wide text-slate-400">
-                    <th className="px-6 py-3 font-semibold">ID</th>
-                    <th className="px-6 py-3 font-semibold">Name</th>
-                    <th className="px-6 py-3 text-right font-semibold">
-                      Action
-                    </th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {customers.map((c, i) => (
-                    <tr
-                      key={c.name}
-                      className={
-                        i !== customers.length - 1
-                          ? "border-b border-slate-100"
-                          : ""
-                      }
-                    >
-                      <td className="px-6 py-4 text-sm text-slate-500">
-                        {c.id}
-                      </td>
-
-                      <td className="px-6 py-4">
-                        <div className="flex items-center gap-3">
-                          <Avatar customer={c} />
-                          <span className="text-sm font-medium text-slate-800">
-                            {c.name}
-                          </span>
-                        </div>
-                      </td>
-
-                      <td className="px-6 py-4">
-                        <div className="flex justify-end">
-                          <button className="rounded-md p-1.5 text-slate-400 hover:bg-slate-50 hover:text-slate-600">
-                            <MoreHorizontal className="h-4 w-4" />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {/* Pagination */}
-            <div className="flex items-center justify-between border-t border-slate-100 px-6 py-4">
-              <span className="text-sm text-slate-500">
-                Showing 1 to 3 of 156 customers
-              </span>
-
-
-              <div className="flex items-center gap-1.5">
-                <button className="flex h-8 w-8 items-center justify-center rounded-md text-slate-400 hover:bg-slate-50">
-                  <ChevronLeft className="h-4 w-4" />
-                </button>
-
-                <button className="flex h-8 w-8 items-center justify-center rounded-md bg-indigo-600 text-sm font-medium text-white">
-                  1
-                </button>
-
-                <button className="flex h-8 w-8 items-center justify-center rounded-md text-sm font-medium text-slate-600 hover:bg-slate-50">
-                  2
-                </button>
-
-                <button className="flex h-8 w-8 items-center justify-center rounded-md text-sm font-medium text-slate-600 hover:bg-slate-50">
-                  3
-                </button>
-
-                <span className="px-1 text-sm text-slate-400">...</span>
-
-                <button className="flex h-8 w-8 items-center justify-center rounded-md text-slate-400 hover:bg-slate-50">
-                  <ChevronRight className="h-4 w-4" />
-                </button>
+              <div className="flex items-center gap-2 text-sm text-slate-500">
+                <span className="font-medium text-slate-600">SORT BY:</span>
+                <span className="font-medium text-slate-700">Most Active</span>
               </div>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+              {categories.map((category) => {
+                const Icon = category.icon;
+                const pillClass = category.active
+                  ? 'bg-[#dff8ee] text-[#0f7a59]'
+                  : 'bg-[#eceff3] text-[#5d6676]';
+
+                return (
+                  <article
+                    key={category.name}
+                    className="rounded-[18px] border border-slate-200 bg-white p-5 shadow-[0_1px_0_rgba(15,23,42,0.02)]"
+                  >
+                    <div className={`mb-5 flex h-[62px] w-[62px] items-center justify-center rounded-xl ${category.iconBg}`}>
+                      <Icon size={28} strokeWidth={1.8} />
+                    </div>
+
+                    <h3 className="text-[24px] font-bold tracking-[-0.02em] text-[#1f2a37]">{category.name}</h3>
+                    <p className="mt-2 min-h-[72px] text-[15px] leading-6 text-slate-500">{category.description}</p>
+
+                    <div className="mt-5 border-t border-slate-200 pt-4">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="text-[11px] font-semibold uppercase tracking-[0.08em] text-slate-400">
+                            Active Tours
+                          </div>
+                          <div className="mt-2 text-[20px] font-bold text-[#1f2a37]">{category.tours}</div>
+                        </div>
+
+                        <span
+                          className={[
+                            'inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold',
+                            pillClass,
+                          ].join(' ')}
+                        >
+                          {category.active ? 'Active' : 'Inactive'}
+                        </span>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }
