@@ -59,8 +59,8 @@ const List_tour = () => {
       <AdminSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <AdminHeader onMenuClick={() => setSidebarOpen(true)} />
 
-      <main className="md:ml-sidebar-width p-4 md:p-lg">
-        <div className="max-w-[1400px] mx-auto">
+      <main className="md:ml-sidebar-width p-4 md:pt-8 md:px-8 md:pb-8">
+        <div className="max-w-[1400px] mx-auto pt-0">
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
             <div>
