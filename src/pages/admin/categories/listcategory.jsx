@@ -57,10 +57,10 @@ export default function ManageCategory() {
 
       <main className="md:ml-sidebar-width p-4 md:p-6 lg:p-8">
         <div className="min-h-screen px-4 py-6 sm:px-8 lg:px-10">
-          <div className="mx-auto max-w-[1200px]">
+          <div className="mx-auto max-w-300">
             <div className="mb-6 flex items-center justify-between gap-4">
               <div>
-                <h2 className="m-0 text-[28px] font-bold text-[#0f172a]">
+                <h2 className="m-0 text-[28px] font-bold text-ink">
                   Manage Categories
                 </h2>
                 <p className="mt-1 text-[14px] text-slate-500">
@@ -103,12 +103,12 @@ export default function ManageCategory() {
                     key={category.name}
                     className="rounded-[18px] border border-slate-200 bg-white p-5 shadow-[0_1px_0_rgba(15,23,42,0.02)]"
                   >
-                    <div className={`mb-5 flex h-[62px] w-[62px] items-center justify-center rounded-xl ${category.iconBg}`}>
+                    <div className={`mb-5 flex h-15.5 w-15.5 items-center justify-center rounded-xl ${category.iconBg}`}>
                       <Icon size={28} strokeWidth={1.8} />
                     </div>
 
                     <h3 className="text-[24px] font-bold tracking-[-0.02em] text-[#1f2a37]">{category.name}</h3>
-                    <p className="mt-2 min-h-[72px] text-[15px] leading-6 text-slate-500">{category.description}</p>
+                    <p className="mt-2 min-h-18 text-[15px] leading-6 text-slate-500">{category.description}</p>
 
                     <div className="mt-5 border-t border-slate-200 pt-4">
                       <div className="flex items-center justify-between">
