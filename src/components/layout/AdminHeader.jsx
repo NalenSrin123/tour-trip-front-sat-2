@@ -1,4 +1,4 @@
-export default function AdminHeader({ onMenuClick }) {
+export default function AdminHeader({ title, onMenuClick }) {
   return (
     <header className="bg-surface sticky top-0 z-30 flex justify-between items-center h-16 px-4 md:px-lg md:ml-sidebar-width border-b border-outline-variant">
       {/* Mobile Menu Button */}
@@ -12,6 +12,12 @@ export default function AdminHeader({ onMenuClick }) {
           <span className="material-symbols-outlined">menu</span>
         </button>
       </div>
+
+      {title && (
+        <div className="hidden md:flex items-center min-w-0 flex-1 mr-4">
+          <h1 className="text-lg font-semibold text-on-surface truncate">{title}</h1>
+        </div>
+      )}
 
       {/* Search Bar on Left */}
       <div className="hidden lg:flex items-center w-72 xl:w-80 mr-4">

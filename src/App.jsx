@@ -31,6 +31,7 @@ import ReviewsManagement from './pages/admin/reviews/ReviewsManagement';
 import ProfilePage from './pages/admin/profile/user_profile';
 import ManageCategory from './pages/admin/categories/listcategory';
 import CreateCategory from './pages/admin/categories/CreateCategory';
+import UpdateTour from './components/tour/update_tour';
 
 function App() {
   return (
@@ -67,6 +68,8 @@ function App() {
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/admin/add-new-tour" element={<AddNewTour />} />
+      <Route path="/admin/update-tour" element={<UpdateTour />} />
+      <Route path="/admin/update-tour/:tourId" element={<UpdateTour />} />
       <Route path="/confirm-otp" element={<ConfirmOTP />} />
       <Route path="/create-user" element={<CreateUser />} />
       <Route path="/design-section-explore" element={<DegsignSectionExpolore />} />
