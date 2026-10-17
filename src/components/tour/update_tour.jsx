@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import AdminSidebar from '../layout/AdminSidebar';
 import AdminHeader from '../layout/AdminHeader';
 
-const API_URL = 'http://127.0.0.1:8000/api/tours';
+const API_URL = 'http://tour-trip-etec.duckdns.org/api/tours';
 
 const UpdateTour = () => {
   const navigate = useNavigate();
@@ -55,9 +55,10 @@ const UpdateTour = () => {
       const response = await fetch(
         `${API_URL}/${encodeURIComponent(id)}`,
         {
-          method: 'GET',
+          method: 'PUT',
           headers: {
             Accept: 'application/json',
+            'Content-Type': 'application/json',
           },
         }
       );
